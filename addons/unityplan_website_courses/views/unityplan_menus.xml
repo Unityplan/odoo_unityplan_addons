@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+    <!-- Courses top-menu -->
+    <menuitem name="Courses"
+              id="unityplan_website_slides_menu_courses"
+              parent="unityplan.unityplan_menu_root"
+              sequence="50"/>
+
+    <!-- Courses sub-menu -->
+    <menuitem name="Courses"
+              id="unityplan_website_slides_menu_courses_courses"
+              parent="unityplan_website_slides_menu_courses"
+              sequence="1"
+              action="website_slides.slide_channel_action_overview"/>
+    <menuitem name="Contents"
+              id="unityplan_website_slides_menu_courses_content"
+              parent="unityplan_website_slides_menu_courses"
+              sequence="2"
+              action="website_slides.slide_slide_action"/>
+    <menuitem name="Certifications"
+              id="unityplan_website_slides_menu_courses_certification"
+              parent="unityplan_website_slides_menu_courses"
+              sequence="3"
+              action="website_slides_survey.survey_survey_action_slides"/>
+
+    <!-- Forums top-menu -->
+    <menuitem name="Forums"
+              id="unityplan_website_slides_menu_forum"
+              parent="unityplan.unityplan_menu_root"
+              sequence="40"/>
+    <!-- Forum sub-menu -->
+    <menuitem name="Forums"
+              id="unityplan_website_slides_menu_forum_forum"
+              parent="unityplan_website_slides_menu_forum"
+              sequence="1"
+              action="website_slides_forum.forum_forum_action_channel"/>
+    <menuitem name="Posts"
+              id="unityplan_website_slides_menu_forum_post"
+              parent="unityplan_website_slides_menu_forum"
+              sequence="2"
+              action="website_slides_forum.forum_post_action_channel"/>
+
+    <!-- Reporting, Courses sub-menu -->
+    <menuitem name="Courses"
+              id="unityplan_website_slides_menu_reporting_courses"
+              parent="unityplan.unityplan_admin_menu_reporting"
+              sequence="10"/>
+    <!-- Reporting, Courses Reporting sub-menu -->
+    <menuitem name="Courses"
+        id="unityplan_website_slides_menu_report_courses"
+        parent="unityplan_website_slides_menu_reporting_courses"
+        sequence="1"
+        action="website_slides.slide_channel_action_report"/>
+    <menuitem name="Contents"
+        id="unityplan_website_slides_menu_report_contents"
+        parent="unityplan_website_slides_menu_reporting_courses"
+        sequence="2"
+        action="website_slides.slide_slide_action_report"/>
+    <menuitem name="Attendees"
+        id="unityplan_website_slides_menu_report_attendees"
+        parent="unityplan_website_slides_menu_reporting_courses"
+        sequence="5"
+        action="website_slides.slide_channel_partner_action_report"/>
+    <menuitem name="Reviews"
+        id="unityplan_website_slides_menu_report_reviews"
+        parent="unityplan_website_slides_menu_reporting_courses"
+        sequence="10"
+        action="website_slides.rating_rating_action_slide_channel"/>
+    <menuitem name="Quizzes"
+        id="unityplan_website_slides_menu_report_quizzes"
+        parent="unityplan_website_slides_menu_reporting_courses"
+        sequence="15"
+        action="website_slides.slide_question_action_report"/>
+
+    <!-- Configuration, Courses sub-menu -->
+    <menuitem name="Courses"
+              id="unityplan_website_slides_menu_configuration"
+              parent="unityplan.unityplan_admin_menu_configuration"
+              sequence="50"/>
+     <!-- Configuration, Courses Settings sub-menu -->
+    <menuitem name="Settings"
+        id="unityplan_website_slides_menu_config_settings"
+        parent="unityplan_website_slides_menu_configuration"
+        sequence="1"
+        action="website_slides.website_slides_action_settings"
+        groups="base.group_system"/>
+    <menuitem name="Course Groups"
+        id="unityplan_website_slides_menu_config_course_groups"
+        parent="unityplan_website_slides_menu_configuration"
+        sequence="2"
+        action="website_slides.slide_channel_tag_group_action"/>
+    <menuitem name="Content Tags"
+        id="unityplan_website_slides_menu_config_content_tags"
+        parent="unityplan_website_slides_menu_configuration"
+        sequence="3"
+        action="website_slides.action_slide_tag"/>
+  </data>
+
+</odoo>

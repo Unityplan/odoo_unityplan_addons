@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+    <!-- Top menu item -->
+    <menuitem
+            name="Unity Plan"
+            id="unityplan_menu_root"
+            sequence="1"
+    />
+
+    <!-- menu bar Dashboard menu -->
+    <!--<menuitem
+            name="Dashboard"
+            id="unityplan_admin_menu_dashboard_action_window"
+            parent="unityplan_menu_root"
+            action="unityplan_dashboard_action"
+            sequence="1"
+    />-->
+    <!-- menu bar People menu -->
+    <menuitem
+            name="People"
+            id="unityplan_admin_menu_users"
+            parent="unityplan_menu_root"
+            sequence="10"
+    />
+    <!-- menu bar Reporting menu -->
+    <menuitem
+            name="Reporting"
+            id="unityplan_admin_menu_reporting"
+            parent="unityplan_menu_root"
+            sequence="80"
+    />
+    <!-- menu bar Settings menu -->
+    <menuitem
+            name="Configuration"
+            id="unityplan_admin_menu_configuration"
+            parent="unityplan_menu_root"
+            sequence="90"
+    />
+
+      <menuitem
+              name="Unity Plan"
+              id="unityplan_admin_menu_configuration_unityplan"
+              parent="unityplan_admin_menu_configuration"
+              sequence="1"
+      />
+        <menuitem
+                name="Categories"
+                id="unityplan_admin_menu_configuration_tags_category_tags_action_window"
+                parent="unityplan_admin_menu_configuration_unityplan"
+                action="unityplan_category_tags_action"
+        />
+
+
+
+  </data>
+</odoo>

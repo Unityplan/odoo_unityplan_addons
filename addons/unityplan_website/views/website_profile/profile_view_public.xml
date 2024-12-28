@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ========== PROFILE PUBLIC========== -->
+        <template id="user_profile_public_page" name="User Profile Public Page">
+            <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+            <t t-call="website.layout">
+                <div id="wrap" class="o_wprofile_wrap mt-0">
+                    <t t-call="unityplan_website.user_profile_header"/>
+                    <t t-call="unityplan_website.user_profile_public_content"/>
+                </div>
+            </t>
+        </template>
+
+        <!-- ========== PROFILE PUBLIC CONTENT ========== -->
+        <template id="user_profile_public_content" name="User Profile Public Content">
+            <div class="container">
+                <div class="row">
+                    <t t-call="unityplan_website.user_profile_sidebar"/>
+
+                    <!-- ========== PROFILE CONTENT ========== -->
+                    <div class="col-12 col-md-8 col-lg-9 position-relative">
+                        <ul class="nav nav-tabs o_wprofile_nav_tabs flex-nowrap" role="tablist"
+                            id="profile_extra_info_tablist">
+                            <li class="nav-item">
+                                <a role="tab" aria-controls="about" href="#profile_tab_content_about"
+                                   t-attf-class="nav-link #{'active' if not active_tab or active_tab == 'about' else ''}"
+                                   data-bs-toggle="tab">About
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-4 o_wprofile_tabs_content mb-4" id="profile_extra_info_tabcontent">
+                            <div role="tabpanel"
+                                 t-attf-class="tab-pane #{ 'show active' if not active_tab or active_tab == 'about' else '' }"
+                                 id="profile_tab_content_about">
+                                <div id="profile_about_info" class="mb32">
+                                    <h5 class="border-bottom pb-1">Information</h5>
+                                    <t t-call="unityplan_website.user_information"/>
+                                </div>
+                                <div id="profile_about_badge" class="mb32">
+                                    <h5 class="border-bottom pb-1">Badges</h5>
+                                    <t t-call="website_profile.user_badges"></t>
+                                </div>
+                                <div t-if="user.partner_id.website_description" class="o_wprofile_editor_form mb32">
+                                    <h5 class="border-bottom pb-1">Biography</h5>
+                                    <span class="o_forum_profile_bio text-break"
+                                          t-field="user.partner_id.website_description"/>
+                                    <t t-call="website_profile.user_biography_editor"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+        <!-- ========== PROFILE PERSONAL ========== -->
+        <template id="user_profile_personal_page" name="User Profile Personal Page">
+            <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+            <t t-call="website.layout">
+                <div id="wrap" class="o_wprofile_wrap mt-0">
+                    <t t-call="unityplan_website.user_profile_header_personal"/>
+                    <t t-call="unityplan_website.user_profile_personal_content"/>
+                </div>
+            </t>
+        </template>
+
+
+
+        <!-- ========== PROFILE PERSONAL CONTENT ========== -->
+        <template id="user_profile_personal_content" name="User Profile Personal Content">
+            <div class="container">
+                <div class="row">
+                    <t t-call="unityplan_website.user_profile_sidebar"/>
+
+                    <!-- ========== OVERVIEW CONTENT ========== -->
+                    <div class="col-12 col-md-8 col-lg-9 position-relative">
+                        <ul class="nav nav-tabs o_wprofile_nav_tabs flex-nowrap" role="tablist" id="profile_extra_info_tablist">
+                            <t t-if="is_preview_tester">
+                            <li class="nav-item">
+                                <a id="profile_tab_news" role="tab" aria-controls="profile_tab_news_pane"
+                                   href="#news" class="nav-link" data-bs-toggle="tab">
+                                    <i class="fa fa-newspaper-o me-1"></i>News <span class="badge bg-secondary">Preview</span>
+                                </a>
+                            </li>
+                            </t>
+                            <li class="nav-item">
+                                <a id="profile_tab_badges" role="tab" aria-controls="profile_tab_badges_pane"
+                                   href="#badges" class="nav-link" data-bs-toggle="tab">
+                                    <i class="fa fa-trophy me-1"></i>Badges
+                                </a>
+                            </li>
+                            <t t-if="is_preview_tester">
+                            <li class="nav-item">
+                                <a id="profile_tab_forum" role="tab" aria-controls="profile_tab_forum_pane"
+                                   href="#forum" class="nav-link" data-bs-toggle="tab">
+                                    <i class="fa fa-comments me-1"></i>Forum <span class="badge bg-secondary">Preview</span>
+                                </a>
+                            </li>
+                            </t>
+                            <t t-if="is_preview_tester">
+                            <li class="nav-item">
+                                <a id="profile_tab_courses" role="tab" aria-controls="profile_tab_courses_pane"
+                                   href="#courses" class="nav-link" data-bs-toggle="tab">
+                                    <i class="fa fa-graduation-cap me-1"></i>Courses <span class="badge bg-secondary">Preview</span>
+                                </a>
+                            </li>
+                            </t>
+<!--                            <li class="nav-item">-->
+<!--                                <a id="profile_tab_friends" role="tab" aria-controls="profile_tab_friends_pane"-->
+<!--                                   href="#friends" class="nav-link" data-bs-toggle="tab">-->
+<!--                                    <i class="fa fa-users me-1"></i>Friends-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li class="nav-item">-->
+<!--                                <a id="profile_tab_messages" role="tab" aria-controls="profile_tab_messages_pane"-->
+<!--                                   href="#messages" class="nav-link" data-bs-toggle="tab">-->
+<!--                                    <i class="fa fa-envelope me-1"></i>Messages-->
+<!--                                </a>-->
+<!--                            </li>-->
+                            <li class="nav-item">
+                                <a id="profile_tab_profile" role="tab" aria-controls="profile_tab_profile_pane"
+                                   href="#profile" class="nav-link" data-bs-toggle="tab">
+                                    <i class="fa fa-user me-1"></i>Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="profile_tab_settings" role="tab" aria-controls="profile_tab_settings_pane"
+                                   href="#settings" class="nav-link" data-bs-toggle="tab">
+                                    <i class="fa fa-cog me-1"></i>Settings
+                                </a>
+                            </li>
+                        </ul>
+
+                        <t t-call="unityplan_website.user_profile_alert_message"/>
+
+                        <div class="tab-content py-4 o_wprofile_tabs_content mb-4" id="profile_extra_info_tabcontent">
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_news_pane" aria-labelledby="profile_tab_news" tabindex="0">
+                                <div t-if="user.partner_id.website_description" class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-newspaper-o me-1"></i>News
+                                    </h5>
+                                    <p class="mb256">No News yet!</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_badges_pane" aria-labelledby="profile_tab_badges" tabindex="0">
+                                <div class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-trophy me-1"></i>Badges
+                                    </h5>
+                                    <t t-call="website_profile.user_badges"></t>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_forum_pane" aria-labelledby="profile_tab_forum" tabindex="0">
+                                <div t-if="user.partner_id.website_description" class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-comments me-1"></i>Forum
+                                    </h5>
+                                    <p class="mb256">Not implemented yet</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_courses_pane" aria-labelledby="profile_tab_courses" tabindex="0">
+                                <div t-if="user.partner_id.website_description" class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-graduation-cap me-1"></i>Courses
+                                    </h5>
+                                    <p class="mb256">Not implemented yet</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_friends_pane" aria-labelledby="profile_tab_friends" tabindex="0">
+                                <div t-if="user.partner_id.website_description" class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-users me-1"></i>Friends
+                                    </h5>
+                                    <p class="mb256">Not implemented yet</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_messages_pane" aria-labelledby="profile_tab_messages" tabindex="0">
+                                <div class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-envelope me-1"></i>Messages
+                                    </h5>
+                                    <p class="mb256">No messages yet</p>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_profile_pane" aria-labelledby="profile_tab_profile" tabindex="0">
+                                <div class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-user me-1"></i>Profile
+                                    </h5>
+                                    <t t-call="unityplan_website.user_profile_edit_content"/>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile_tab_settings_pane" aria-labelledby="profile_tab_settings" tabindex="0">
+                                <div class="mb32">
+                                    <h5 class="border-bottom pb-1">
+                                        <i class="fa fa-cog me-1"></i>Settings
+                                    </h5>
+                                    <t t-call="unityplan_website.user_profile_settings_content"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+</odoo>

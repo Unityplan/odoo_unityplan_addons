@@ -1,0 +1,16 @@
+//------------------------------------------------------------------------------
+// Fields
+//------------------------------------------------------------------------------
+
+.o_field_widget {
+  // Default display and alignment of widget and internal <input/>
+  text-align: inherit;
+  display: var(--fieldWidget-display, inline-block);
+
+  textarea.o_input,
+  input.o_input {
+    display: inline-block;
+    text-align: inherit;
+    background-color: #f5f5f5;
+  }
+}

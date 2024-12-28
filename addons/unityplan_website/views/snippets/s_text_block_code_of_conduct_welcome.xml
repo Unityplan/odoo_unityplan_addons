@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_text_block_code_of_conduct_welcome" name="Text Block">
+    <section class="s_text_block pt20 pb20">
+        <div class="container s_allow_columns">
+            <h3>Welcome to the <strong>Unity Plan</strong> website</h3>
+            <p class="text-danger ">
+                <strong>This is just a pre-defined placeholder text, please replace it!</strong>
+            </p>
+            <p class="lead">
+                We are thrilled to have you here. Our website is designed to provide you with the best experience possible.
+            </p>
+            <p class="lead">
+                The Code of Conduct is a set of guidelines that outlines the expected behavior and responsibilities of all members of our community.
+                It ensures a safe, respectful, and inclusive environment for everyone.
+            </p>
+        </div>
+    </section>
+</template>
+
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unityplan_base_country_public,res_country Public Read,model_res_country,"",1,0,0,0
+access_unityplan_category_tags_unityplan_administrator,unityplan.category.tag Unityplan Administrators,model_unityplan_category_tag,group_unityplan_administrators,1,1,1,1
+access_unityplan_category_tags_public,unityplan.category.tag Public Read,model_unityplan_category_tag,"",1,0,0,0
+access_unityplan_dashboard_unityplan_administrators,unityplan.dashboard Unityplan Administrators,model_unityplan_dashboard,group_unityplan_administrators,1,1,1,1
+access_unityplan_dashboard_internal,unityplan.dashboard Internal Read,model_unityplan_dashboard,base.group_user,1,0,0,0
+access_unityplan_base_unityplan_administrators,unityplan.base Unityplan Administrators,model_unityplan_base,group_unityplan_administrators,1,1,1,1
+

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- ========== PROFILE DELETE ACCOUNT PAGE ========== -->
+    <template id="user_profile_delete_account_page" name="User Profile Delete Account Page">
+        <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="o_wprofile_wrap mt-0">
+                <t t-call="unityplan_website.user_profile_header"/>
+                <div class="container">
+                    <div class="row mt-3 mb-5">
+                        <div class="o_portal_security_body">
+                            <div class="alert alert-danger" role="alert" t-if="get_error(errors, 'error')">
+                                <t t-esc="errors"/>
+                            </div>
+                            <div class="mt-3">
+                                <a t-attf-href="/profile/view#profile">
+                                    Go to user profile page
+                                    <i class="fa fa-arrow-right"/>
+                                </a>
+                            </div>
+                            <t t-call="unityplan_website.user_profile_delete_account_content"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- ========== PROFILE DELETE ACCOUNT PAGE CONTENT ========== -->
+    <template id="user_profile_delete_account_content" name="User Profile Delete Account Content">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-7 my-3 d-flex align-items-stretch">
+                <section class="d-flex flex-column w-100">
+                    <div class="mx-4 flex-grow-1">
+                        <h4>What does deleting your account mean?</h4>
+                        <p>
+                            Deleting your account will permanently remove all your data from this site.<br />
+                            <i class="fa fa-exclamation-triangle text-danger"/>This action cannot be undone!
+                        </p>
+                        <h5>
+                            Consequences of deleting your account:
+                        </h5>
+                        <ul>
+                            <li>You will lose access to all data related to your account</li>
+                            <li>All your personal information will be permanently deleted.</li>
+                            <li>You will not be able to recover your account or any data associated with it.</li>
+                        </ul>
+                        <p>
+                            Please ensure you have backed up any important data before proceeding with the deletion.
+                        </p>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-5 my-3 d-flex align-items-stretch">
+                <section class="d-flex flex-column w-100" name="portal_deactivate_account" groups="base.group_portal">
+                    <div class="d-flex justify-content-center align-items-center mx-4 flex-grow-1">
+                        <div class="text-center">
+                            <h4>Delete My Account</h4>
+                            <t t-set="deactivate_error" t-value="get_error(errors, 'deactivate')"/>
+                            <button class="btn btn-secondary" data-bs-toggle="modal"
+                                    data-bs-target="#portal_deactivate_account_modal">
+                                Confirm Deletion
+                            </button>
+                            <div t-attf-class="modal #{'show d-block' if open_deactivate_modal else ''}"
+                                 id="portal_deactivate_account_modal" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger">
+                                            <h5 class="modal-title">Are you sure you want to do this?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <form action="/profile/delete_account" method="post" class="modal-body"
+                                              id="portal_deactivate_account_form">
+                                            <div>
+                                                <div class="alert alert-danger"
+                                                     t-esc="get_error(errors, 'deactivate.other')"/>
+                                                <p class="text-muted">
+                                                    Disable your account, preventing any further login.
+                                                    <br/>
+                                                    <b>
+                                                        <i class="fa fa-exclamation-triangle text-danger"></i>
+                                                        This action cannot be undone.
+                                                    </b>
+                                                </p>
+                                                <hr/>
+                                                <p>1. Enter your password to confirm you own this account</p>
+                                                <input name="password" type="password" required="1"
+                                                       t-attf-class="form-control #{'is-invalid' if deactivate_error == 'password' else ''}"
+                                                       placeholder="Password"/>
+                                                <div t-if="deactivate_error == 'password'" class="invalid-feedback">
+                                                    Wrong password.
+                                                </div>
+                                                <hr/>
+                                                <p>
+                                                    2. Confirm you want to delete your account by
+                                                    copying down your login (<t t-esc="env.user.login"/>).
+                                                </p>
+                                                <input name="validation" type="text" required="1"
+                                                       t-attf-class="form-control #{'is-invalid' if deactivate_error == 'validation' else ''}"/>
+                                                <div t-if="deactivate_error == 'validation'" class="invalid-feedback">
+                                                    You should enter "<t t-esc="env.user.login"/>" to validate your
+                                                    action.
+                                                </div>
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <input type="checkbox" name="request_blacklist"
+                                                           id="request_blacklist"
+                                                           checked="1"/>
+                                                    <label for="request_blacklist" class="ms-2 mw-100 fw-normal mt-3">
+                                                        Put my email and phone in a block list to make sure I'm never
+                                                        contacted
+                                                        again
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        </form>
+                                        <div class="modal-footer justify-content-start">
+                                            <input type="submit" class="btn btn-danger"
+                                                   form="portal_deactivate_account_form"
+                                                   value="Delete Account"/>
+                                            <button type="button" class="btn" data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+    </template>
+
+</odoo>

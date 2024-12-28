@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========== PROFILE PAGE HEADER, PERSONAL ========== -->
+    <template id="user_profile_header_personal" name="User Profile Header, Personal">
+        <div class="o_wprofile_header o_wprofile_gradient position-relative text-white">
+            <t t-call="unityplan_website.user_profile_sub_nav">
+                <t t-set="view_user">
+                    <t t-esc="user.name"/>
+                </t>
+            </t>
+
+            <div class="container pb-3 pb-md-0 pt-2 pt-md-5">
+                <div class="row">
+                    <!-- ==== Header Left ==== -->
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div t-attf-class="d-flex align-items-start h-100 #{'justify-content-between' if (request.env.user == user) else 'justify-content-around' }">
+                            <div class="o_wprofile_pict d-inline-block mb-3 mb-md-0"
+                                 t-attf-style="background-image: url(#{website.image_url(user, 'avatar_1024')});"/>
+                        </div>
+                    </div>
+
+                    <!-- ==== Header Right ==== -->
+                    <div class="col-12 col-md-8 col-lg-9 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h2 class="o_card_people_name">
+                                <span t-field="user.name"/>
+                                <!--                                <small t-if="user.karma == 0">(not verified)</small>-->
+                            </h2>
+                        </div>
+
+                        <div class="d-flex flex-column justify-content-center flex-grow-1 mb-0 mb-md-5">
+                            <!--                            <div t-if="user.partner_id.company_name" class="lead mb-2">-->
+                            <!--                                <i class="fa fa-building-o fa-fw me-1"/>-->
+                            <!--                                <span t-field="user.partner_id.company_name"/>-->
+                            <!--                            </div>-->
+                            <!--                            <div t-if="user.city or user.country_id" class="lead mb-2">-->
+                            <!--                                <i class="fa fa-map-marker fa-fw me-1"/>-->
+                            <!--                                <span t-field="user.city"/>-->
+                            <!--                                <span class="text-nowrap ms-1" t-if="user.country_id">(<span-->
+                            <!--                                        t-field="user.country_id"/>)-->
+                            <!--                                </span>-->
+                            <!--                            </div>-->
+                            <!--                            <div t-if="user.website" class="lead mb-2">-->
+                            <!--                                <i class="fa fa-globe fa-fw me-1"/>-->
+                            <!--                                <span t-field="user.website"/>-->
+                            <!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== PROFILE PAGE HEADER, PUBLIC ========== -->
+    <template id="user_profile_header" name="User Profile Header">
+        <div class="o_wprofile_header o_wprofile_gradient position-relative text-white">
+            <t t-call="unityplan_website.public_user_profile_sub_nav">
+                <t t-set="view_user">
+                    <t t-esc="user.name"/>
+                </t>
+            </t>
+            <div class="container pb-3 pb-md-0 pt-2 pt-md-5">
+                <div class="row">
+                    <div class="col-12 col-md-8 col-lg-9 d-flex flex-column" style="height: 140px">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h2 class="o_card_people_name">
+                                <div class="mx-4">
+                                    <t t-esc="page_name"/>
+                                </div>
+                            </h2>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center flex-grow-1 mb-0 mb-md-5 mx-3">
+                            <div class="lead mb-2 mx-3">
+                                <t t-esc="page_description"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== PRIVATE PROFILE BREADCRUMBS ========== -->
+    <template id="user_profile_sub_nav" name="User profile Breadcrumbs">
+        <div class="o_wprofile_all_users_nav">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <!-- Desktop Mode -->
+                    <nav aria-label="breadcrumb" class="col d-none d-md-flex">
+                        <ol class="breadcrumb bg-transparent mb-0 ps-0 py-0">
+                            <li t-attf-class="breadcrumb-item #{'active' if not view_user else ''}">
+                                <a href="/profile/view">My Account</a>
+                            </li>
+                            <li t-if="view_user" class="breadcrumb-item active">
+                                <a>
+                                    <t t-esc="view_user"/>
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <div class="col d-none d-md-flex flex-row align-items-center justify-content-end">
+
+                    </div>
+
+                    <!-- Mobile Mode -->
+                    <div class="col d-md-none py-1 o_wprofile_user_profile_sub_nav_mobile_col">
+                        <div class="btn-group w-100 position-relative" role="group" aria-label="Mobile sub-nav">
+                            <div class="btn-group w-100 ms-2">
+                                <a class="btn bg-black-25 text-white dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nav
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" t-att-href="home_url or '/'">Home</a>
+                                    <a class="dropdown-item" href="/profile/view">&#9492; My Account</a>
+                                    <a t-if="view_user" class="dropdown-item">&#9492;
+                                        <t t-esc="view_user"/>
+                                    </a>
+                                </ul>
+                            </div>
+
+                            <div class="btn-group ms-1 position-static me-2">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== PUBLIC PROFILE BREADCRUMBS ========== -->
+    <template id="public_user_profile_sub_nav" name="Public User profile Breadcrumbs">
+        <div class="o_wprofile_all_users_nav">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+                    <!-- Desktop Mode -->
+                    <nav aria-label="breadcrumb" class="col d-none d-md-flex">
+                        <ol class="breadcrumb bg-transparent mb-0 ps-0 py-0">
+                            <li t-attf-class="breadcrumb-item #{'active' if not view_user else ''}">
+                                <!--<a href="/profile/all">All Users</a>-->
+                                All Users
+                            </li>
+                            <li t-if="view_user" class="breadcrumb-item active">
+                                <a>
+                                    <t t-esc="view_user"/>
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+
+                    <div class="col d-none d-md-flex flex-row align-items-center justify-content-end">
+
+                    </div>
+
+                    <!-- Mobile Mode -->
+                    <div class="col d-md-none py-1 o_wprofile_user_profile_sub_nav_mobile_col">
+                        <div class="btn-group w-100 position-relative" role="group" aria-label="Mobile sub-nav">
+                            <div class="btn-group w-100 ms-2">
+                                <a class="btn bg-black-25 text-white dropdown-toggle" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nav
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" t-att-href="home_url or '/'">Home</a>
+                                    <a class="dropdown-item" href="/profile/view">&#9492; My Account</a>
+                                    <a t-if="view_user" class="dropdown-item">&#9492;
+                                        <t t-esc="view_user"/>
+                                    </a>
+                                </ul>
+                            </div>
+
+                            <div class="btn-group ms-1 position-static me-2">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== PROFILE SIDEBAR ========== -->
+    <template id="user_profile_sidebar" name="User Profile Sidebar">
+        <!-- ========== PROFILE SIDEBAR ========== -->
+        <div class="col-12 col-md-4 col-lg-3 mt-3 mt-md-0">
+            <div class="o_wprofile_sidebar bg-white px-3 py-2 py-md-3 mb-3 mb-md-5">
+                <div class="o_wprofile_sidebar_top d-flex justify-content-between">
+                    <div t-if="user.rank_id" class="d-flex align-items-center">
+                        <small class="fw-bold me-2">Current rank:</small>
+                        <img t-att-src="website.image_url(user.rank_id, 'image_128')" width="16" height="16"
+                             alt="" class="o_object_fit_cover me-1"/>
+                        <a t-attf-href="/profile/ranks_badges?url_origin=#{request.httprequest.path}&amp;name_origin=#{user.name}"
+                           t-field="user.rank_id"/>
+                    </div>
+                    <button class="btn btn-sm d-md-none bg-white border" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#o_wprofile_sidebar_collapse"
+                            aria-expanded="false" aria-controls="o_wprofile_sidebar_collapse">More info
+                    </button>
+                </div>
+                <div class="collapse d-md-block" id="o_wprofile_sidebar_collapse">
+                    <t t-set="next_rank_id" t-value="user._get_next_rank()"/>
+                    <small t-if="next_rank_id" class="fw-bold mt-1">Next rank:</small>
+                    <t t-if="next_rank_id or user.rank_id" t-call="website_profile.profile_next_rank_card">
+                        <t t-set="img_max_width" t-value="'40%'"/>
+                    </t>
+
+                    <table class="table table-sm w-100" id="o_wprofile_sidebar_table">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <small class="fw-bold">Joined</small>
+                                </th>
+                                <td>
+                                    <span t-field="user.create_date" t-options='{"format": "d MMM Y"}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <small class="fw-bold">Badges</small>
+                                </th>
+                                <td t-if="user.badge_ids"
+                                    t-esc="len(user.badge_ids.filtered(lambda b: b.badge_id.website_published))"/>
+                                <td t-else="">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== PROFILE ALERT MESSAGE ========== -->
+    <template id="user_profile_alert_message" name="User Profile Alert Message">
+        <div class="o_wprofile_email_validation_container">
+            <div id="profile_alert_message" class="m-3">
+                <t t-call="website_profile.email_validation_banner">
+                    <t t-set="redirect_url" t-value="'/profile/user/%s' % user.id"/>
+                    <t t-set="additional_validation_email_message"/>
+                    <t t-set="additional_validated_email_message"> Your email is now validated</t>
+                </t>
+
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== PROFILE VIEW USER INFORMATION ========== -->
+    <template id="user_information" name="User Information">
+        <div class="row">
+            <div class="mb-3 col-12 col-sm-6 col-lg-4 col-xxl-3">
+                <div class="text-bard mb-1 ">
+                    <i class="fa fa-user" aria-hidden="true"/>
+                    <span class="">Name:</span>
+                    <span t-field="user.name"/>
+                </div>
+                <div class="text-bard mb-1 ">
+                    <i class="fa fa-globe" aria-hidden="true"/>
+                    <span class="">Country:</span>
+                    <span t-field="user.partner_id.country_id.name"/>
+                </div>
+                <div class="text-bard mb-1">
+                    <i class="fa fa-clock-o" aria-hidden="true"/>
+                    <span class="">Timezone:</span>
+                    <span t-field="user.gmt_offset"/>
+                </div>
+                <div class="text-bard mb-1" t-if="spoken_languages_json">
+                    <i class="fa fa-language" aria-hidden="true"/>
+                    <span class="">Spoken Languages:</span>
+                    <ul>
+                        <t t-foreach="spoken_languages_json" t-as="language">
+                            <li>
+                                <t t-esc="language['name']"/>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+                <div class="text-bard mt-3 mb-1" t-if="user.personal_website">
+                    <i class="fa fa-globe" aria-hidden="true"/>
+                    <span class="">Personal Website:</span>
+                    <div style="margin-left: 20px;">
+                        <a t-if="user.personal_website" t-att-href="user.personal_website" target="_blank">
+                            <t t-esc="user.personal_website.replace('http://', '').replace('https://', '')"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="text-bard mt-3 mb-1" t-if="user.website">
+                    <i class="fa fa-globe" aria-hidden="true"/>
+                    <span class="">Business Website:</span>
+                    <div style="margin-left: 20px;">
+                        <a t-if="user.website" t-att-href="user.website" target="_blank">
+                            <t t-esc="user.website.replace('http://', '').replace('https://', '')"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3 col-12 col-sm-6 col-lg-4 col-xxl-3">
+                <div class="row" t-if="user.profile_sharing_is_address_visible">
+                    <div class="text-bard mb-1" style="white-space: nowrap;">
+                        <i class="fa fa-map-marker" aria-hidden="true"/>
+                        <span class="">Address:</span>
+                    </div>
+
+                    <div style="margin-left: 20px;">
+                        <t t-if="user.partner_id.street">
+                            <span t-field="user.partner_id.street"/>
+                            <br/>
+                        </t>
+                        <t t-if="user.partner_id.street2">
+                            <span t-field="user.partner_id.street2"/>
+                            <br/>
+                        </t>
+                        <t t-if="user.partner_id.city or user.partner_id.state_id or user.partner_id.zip">
+                            <span t-if="user.partner_id.city" t-field="user.partner_id.city"/>
+                            <span t-if="user.partner_id.state_id">
+                                , <span t-field="user.partner_id.state_id.name"/>
+                            </span>
+                            <span t-if="user.partner_id.zip">
+                                , <span t-field="user.partner_id.zip"/>
+                            </span>
+                            <br/>
+                        </t>
+                        <t t-if="user.partner_id.country_id">
+                            <span t-field="user.partner_id.country_id.name"/>
+                        </t>
+                    </div>
+                </div>
+                <div class="row"
+                     t-if="user.profile_sharing_is_city_visible and not user.profile_sharing_is_address_visible">
+                    <div class="text-bard mt-3 mb-1">
+                        <i class="fa fa-home" aria-hidden="true"/>
+                        <span class="">City:</span>
+                        <span t-field="user.partner_id.city"/>
+                    </div>
+                </div>
+                <div class="row" t-if="user.profile_sharing_is_phone_visible">
+                    <div class="text-bard mt-3 mb-1" t-if="user.phone">
+                        <i class="fa fa-phone" aria-hidden="true"/>
+                        <span class="">Phone:</span>
+                        <div style="margin-left: 20px;">
+                            <a t-if="user.phone" t-att-href="'tel:' + user.phone" target="_blank">
+                                <t t-esc="user.phone"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" t-if="user.profile_sharing_is_mobile_visible">
+                    <div class="text-bard mt-3 mb-1" t-if="user.mobile">
+                        <i class="fa fa-mobile" aria-hidden="true"/>
+                        <span class="">Mobile:</span>
+                        <div style="margin-left: 20px;">
+                            <a t-if="user.mobile" t-att-href="'tel:' + user.mobile" target="_blank">
+                                <t t-esc="user.mobile"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-call="unityplan_website.user_map_location"/>
+        </div>
+    </template>
+
+    <!-- ========== PROFILE VIEW USER MAP LOCATION ========== -->
+    <template id="user_map_location" name="User Location Map">
+        <div class="mb-3 col-12 col-xxl-6" t-if="user.profile_sharing_is_map_visible">
+            <t t-if="user.partner_id.partner_latitude and user.partner_id.partner_longitude">
+                <t t-set="bbox_value" t-value="1.80"/>
+                <embed
+                        t-att-src="'https://www.openstreetmap.org/export/embed.html?bbox=' + str(user.partner_id.partner_longitude - bbox_value) + ',' + str(user.partner_id.partner_latitude - bbox_value) + ',' + str(user.partner_id.partner_longitude + bbox_value) + ',' + str(user.partner_id.partner_latitude + bbox_value) + '&amp;layer=mapnik&amp;marker=' + str(user.partner_id.partner_latitude) + ',' + str(user.partner_id.partner_longitude) + '&amp;zoom=15'"
+                        width="100%" height="300"
+                        style="border:1px solid black;">
+                </embed>
+            </t>
+        </div>
+    </template>
+
+</odoo>

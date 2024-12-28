@@ -1,0 +1,12 @@
+<odoo>
+    <template id="error_403_forbidden_page" name="403 Forbidden">
+        <t t-call="website.layout">
+            <div class="container mt-5">
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">403 Forbidden</h4>
+                    <p>You do not have the necessary permissions to access this page.</p>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

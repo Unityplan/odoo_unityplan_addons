@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <data>
+    <!-- Configuration, Forums sub-menu -->
+    <menuitem name="Forums"
+              id="unityplan_website_forums_menu_configuration"
+              parent="unityplan.unityplan_admin_menu_configuration"
+              sequence="50"/>
+
+    <menuitem name="Forums"
+              id="unityplan_menu_forum_global"
+              parent="unityplan_website_forums_menu_configuration"
+              action="website_forum.forum_forum_action"
+              sequence="10"/>
+    <menuitem name="Ranks"
+              id="unityplan_menu_forum_rank_global"
+              parent="unityplan_website_forums_menu_configuration"
+              action="gamification.gamification_karma_ranks_action"
+              sequence="20"/>
+    <menuitem name="Tags"
+              id="unityplan_menu_forum_tag_global"
+              parent="unityplan_website_forums_menu_configuration"
+              action="website_forum.forum_tag_action"
+              sequence="30"/>
+    <menuitem name="Badges"
+              id="unityplan_menu_forum_badges"
+              parent="unityplan_website_forums_menu_configuration"
+              action="gamification.badge_list_action"
+              sequence="40"/>
+    <menuitem name="Close Reasons"
+              id="unityplan_menu_forum_post_reasons"
+              parent="unityplan_website_forums_menu_configuration"
+              action="website_forum.forum_post_reason_action"
+              sequence="50"/>
+  </data>
+</odoo>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Roles -->
+        <record id="role_unityplan_country_administrators" model="res.users.role">
+            <field name="name">Unityplan Country Administrators Role</field>
+            <field name="comment">This role is for Unityplan Country Administrators. Backend management of countries and managers</field>
+            <field name="category_id" ref="unityplan.module_category_unityplan_roles"/>
+        </record>
+        <record id="role_unityplan_country_managers" model="res.users.role">
+            <field name="name">Unityplan Country Managers Role</field>
+            <field name="comment">This role is for Unityplan Country Managers. Frontend management of users</field>
+            <field name="category_id" ref="unityplan.module_category_unityplan_roles"/>
+        </record>
+
+        <!-- Groups -->
+        <record id="group_unityplan_country_administrators" model="res.groups">
+            <field name="name">Unityplan Country Administrators</field>
+            <field name="category_id" ref="unityplan.module_category_unityplan_groups"/>
+        </record>
+        <record id="group_unityplan_country_managers" model="res.groups">
+            <field name="name">Unityplan Country Managers</field>
+            <field name="category_id" ref="unityplan.module_category_unityplan_groups"/>
+        </record>
+
+        <!-- Add groups to roles -->
+        <record id="role_unityplan_country_administrators" model="res.users.role">
+            <field name="implied_ids" eval="[(4, ref('group_unityplan_country_administrators'))]"/>
+        </record>
+
+        <record id="role_unityplan_country_managers" model="res.users.role">
+            <field name="implied_ids" eval="[(4, ref('group_unityplan_country_managers'))]"/>
+        </record>
+
+        <!-- Add the default administrator user to the Unityplan Country Administrators Role -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('group_unityplan_country_administrators'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

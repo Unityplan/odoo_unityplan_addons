@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_text_block_code_of_conduct_course_message" name="Text Block">
+    <section class="s_text_block p40 pb40">
+        <div class="container s_allow_columns">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>The Course</h3>
+                    <p class="text-success"><strong>Complete the course to get access to the website</strong></p>
+                </div>
+                <div class="col-md-8 pt-3">
+                    <a t-att-href="cta_btn_href" class="btn btn-primary"><t t-esc="cta_btn_text">Start Course</t></a>
+                </div>
+            </div>
+            <span class="lead">An interactive Code of Conduct course is available for all users. Please take a moment to complete the course.</span>
+            <span class="lead">Upon completion of the course, you will have access to the website and all its features.</span>
+        </div>
+    </section>
+</template>
+
+</odoo>

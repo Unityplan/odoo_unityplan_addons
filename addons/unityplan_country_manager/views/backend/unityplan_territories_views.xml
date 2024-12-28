@@ -1,0 +1,137 @@
+<odoo>
+    <data>
+        <!-- List View for all territories -->
+        <record id="admin_menu_configuration_territories_list_view" model="ir.ui.view">
+            <field name="name">unityplan.territory.list.view</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree string="Country" create="0" delete="0">
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="territory_type"/>
+                        <field name="manager_ids" widget="many2many_tags"/>
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Form View of country on territory list -->
+        <record id="admin_menu_configuration_territories_form_view" model="ir.ui.view">
+            <field name="name">unityplan.territory.form.view</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="replace">
+                    <form>
+
+                        <group name="main_group">
+                            <group name="country_details_group">
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="territory_type"/>
+                            </group>
+                            <group name="country_managers_group" string="Country Managers" colspan="4">
+                                <field name="manager_ids" readonly="True" invisible="1"/>
+                                <field name="temp_user_ids" colspan="2" nolabel="1" context="
+                                        {
+                                            'form_view_ref': 'country_manager_users_form_view'
+                                            'default_country': active_id,
+                                            'default_country_manager': True,
+                                            'default_name': '',
+                                            'default_login': '',
+                                            'default_lang': 'en_US',
+                                            'default_groups_id': [(6, 0, [10])]
+                                        }"
+                                />
+                            </group>
+                        </group>
+
+                    </form>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Actions and Menus -->
+        <record id="admin_menu_configuration_territories_action_window" model="ir.actions.act_window">
+            <field name="name">Territory List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="admin_menu_configuration_territories_action_country" model="ir.actions.act_window">
+            <field name="name">Territories</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No Territory Found!
+                </p>
+                <p>
+                    Manage the list of territories that can be set on your contacts.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Custom Form View for creating new country managers -->
+        <record id="country_manager_users_form_view" model="ir.ui.view">
+            <field name="name">res.users.custom.form.view</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <form string="Create Country Manager">
+
+                        <header>
+                            <button string="Send Password Reset Instructions"
+                                type="object" name="action_reset_password"
+                                invisible="state != 'active'"/>
+                            <button string="Send an Invitation Email"
+                                type="object" name="action_reset_password" context="{'create_user': 1}"
+                                invisible="state != 'new'"/>
+                            <field name="state" widget="statusbar" invisible="state == False"/>
+
+                        </header>
+                            <div invisible="id != False" class="alert alert-success text-center o_form_header" role="status">
+                                <strong>Warning, you are sending an invitation to the email address, when you click save.</strong>
+                            </div>
+                            <div invisible="id == False" class="alert alert-success text-center o_form_header" role="status">
+                                <div invisible="state != 'active'">
+                                    <strong>A password reset has been requested for this user. An email containing the following link has been sent:</strong>
+                                </div>
+                                <div invisible="state != 'new'">
+                                    <strong>An invitation email containing the following subscription link has been sent:</strong>
+                                </div>
+                                <div><field name="signup_url" widget="url"/></div>
+                            </div>
+
+                        <group name="user_details" string="Login Details">
+                            <field name="name"/>
+                            <field name="login"/>
+                            <field name="email" readonly="True"/>
+                        </group>
+                        <group name="user_localization" string="Localization">
+                            <field name="lang"/>
+                            <field name="tz"/>
+                            <field name="country_id" context="{'default_country_id': active_id}"/>
+                        </group>
+                        <group name="user_access_rights" string="Access Rights">
+                            <field name="groups_id" widget="many2many_tags" readonly="True"/>
+                        </group>
+
+                </form>
+            </field>
+        </record>
+
+        <!-- Action to open the custom form view for creating a new country manager -->
+        <record id="action_create_country_manager" model="ir.actions.act_window">
+            <field name="name">Create Country Manager</field>
+            <field name="res_model">res.users</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="country_manager_users_form_view"/>
+            <field name="target">new</field>
+            <field name="context">{'default_country_manager': True}</field>
+        </record>
+    </data>
+</odoo>

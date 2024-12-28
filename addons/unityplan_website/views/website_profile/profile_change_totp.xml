@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ========== PROFILE CHANGE TOTP PAGE ========== -->
+        <template id="user_profile_change_totp" name="User Profile Change TOTP Page">
+            <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+            <t t-call="website.layout">
+                <div id="wrap" class="o_wprofile_wrap mt-0">
+                    <t t-call="unityplan_website.user_profile_header"/>
+                    <div class="container">
+                        <div class="row mt-3 mb-5">
+                            <div class="o_portal_security_body">
+                                <div class="alert alert-danger" role="alert" t-if="get_error(errors, 'error')">
+                                    <t t-esc="errors"/>
+                                </div>
+                                <div class="mt-3">
+                                    <a t-attf-href="/profile/view#profile">
+                                        Go to user profile page
+                                        <i class="fa fa-arrow-right"/>
+                                    </a>
+                                </div>
+                                <t t-call="unityplan_website.user_profile_change_totp_content"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+        <!-- ========== PROFILE CHANGE TOTP CONTENT ========== -->
+        <template id="user_profile_change_totp_content" name="User Profile Change TOTP Content">
+
+            <!--
+               portal users don't have access to non-qweb views anymore, so
+               embed the target view as a *data island* of sorts, a JSON embed
+               of the fields_view_get could have been nice but at 14k it'd be a
+               bit ridiculous
+           -->
+            <div class="d-none" id="totp_wizard_view">
+                <t t-esc="env.ref('auth_totp.view_totp_wizard').sudo().get_combined_arch()"/>
+            </div>
+            <div class="row">
+                <!-- Left Column -->
+                <div class="col-md-6 my-3 d-flex align-items-stretch">
+                    <section class="d-flex flex-column w-100">
+                        <div class="d-flex justify-content-center align-items-center mx-4 flex-grow-1">
+                        <div>
+                        <h4>
+                            <i class="fa fa-shield"></i>
+                            Two-factor authentication
+                        </h4>
+                        <t t-if="not user_id.totp_enabled">
+                            <div class="py-4">
+                                <div class="alert alert-secondary" role="status">
+                                    <i class="fa fa-warning"/>
+                                    Two-factor authentication not enabled
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary" id="auth_totp_portal_enable">
+                                Enable two-factor authentication
+                            </button>
+                        </t>
+                        <t t-else="">
+                            <span class="text-success">
+                                <i class="fa fa-check-circle"/>
+                                Two-factor authentication enabled
+                            </span>
+                            <button type="button" class="btn btn-link" id="auth_totp_portal_disable">
+                                (Disable two-factor authentication)
+                            </button>
+                            <t t-if="len(user_id.totp_trusted_device_ids)">
+                                <table class="table o_main_table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <strong>Trusted Device</strong>
+                                            </th>
+                                            <th>
+                                                <strong>Added On</strong>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="user_id.totp_trusted_device_ids" t-as="td">
+                                            <td>
+                                                <span t-field="td.name"/>
+                                            </td>
+                                            <td>
+                                                <span t-field="td.create_date"/>
+                                            </td>
+                                            <td>
+                                                <i class="fa fa-trash text-danger" type="button" t-att-id="td.id"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-primary" type="button"
+                                        id="auth_totp_portal_revoke_all_devices">
+                                    Revoke All
+                                </button>
+                            </t>
+                        </t>
+                        </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- Right Column -->
+                <div class="col-md-6 my-3 d-flex align-items-stretch">
+                    <section class="d-flex flex-column w-100">
+                        <div class="mx-4 flex-grow-1">
+                        <h4>What is Multi-Factor Authentication?</h4>
+                        <p>
+                            Multi-Factor Authentication (MFA) is like having multiple locks on your cabin door. You need
+                            more than one key to get in, making it harder for anyone to break in.
+                        </p>
+                        <h5>Why Use MFA?</h5>
+                        <p>
+                            Using MFA is like having a strong fence and a guard dog around your property. It adds extra
+                            layers of security, making it much safer and harder for intruders to get in.
+                        </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </template>
+    </data>
+</odoo>

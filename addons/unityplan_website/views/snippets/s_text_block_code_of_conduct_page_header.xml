@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="s_text_block_code_of_conduct_page_header" name="Text">
+    <section class="s_text_block pt40 pb40">
+        <div class="container s_allow_columns">
+            <h2>Code of Conduct</h2>
+        </div>
+    </section>
+</template>
+
+</odoo>

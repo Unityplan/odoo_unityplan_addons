@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem
+            name="Territories"
+            id="admin_menu_configuration_territories"
+            parent="unityplan.unityplan_admin_menu_configuration"
+            sequence="2"
+    />
+    <menuitem
+            name="Manage Territories"
+            id="admin_menu_configuration_territory_list_action_window"
+            parent="admin_menu_configuration_territories"
+            action="admin_menu_configuration_territories_action_window"
+    />
+</odoo>

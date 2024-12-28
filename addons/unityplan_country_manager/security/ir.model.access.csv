@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_unityplan_country_manager_admin,unityplan.country_manager Country Administrators,model_res_country_manager,group_unityplan_country_administrators,1,1,1,1
+access_unityplan_country_manager_manager,unityplan.country_manager Country Managers Read (frontend user),model_res_country_manager,group_unityplan_country_managers,1,0,0,0
+access_res_users_country_manager_managers,res.users Country Managers Read/Write (frontend user),base.model_res_users,group_unityplan_country_managers,1,1,0,0
+access_res_partners_country_manager_managers,res.partners Country Managers Read/Write (frontend user),base.model_res_partner,group_unityplan_country_managers,1,1,0,0
+

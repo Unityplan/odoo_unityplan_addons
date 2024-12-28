@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ========== EDIT PROFILE PAGE ========== -->
+        <template id="user_profile_edit_page" name="User Profile Edit Page">
+            <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+            <t t-call="website.layout">
+                <div id="wrap" class="o_wprofile_wrap mt-0">
+                    <t t-call="unityplan_website.user_profile_header"/>
+                    <div class="d-flex justify-content-center">
+
+                        <t t-call="unityplan_website.user_profile_alert_message"/>
+
+                    </div>
+
+                    <t t-call="unityplan_website.user_profile_edit_content"/>
+                </div>
+            </t>
+        </template>
+
+
+        <!-- ========== EDIT PROFILE CONTENT ========== -->
+        <template id="user_profile_edit_content" name="User Profile Edit Content">
+            <div class="container">
+                <div class="row mt-3">
+                    <form t-attf-action="/profile/user/save" method="post" role="form"
+                          class="o_wprofile_editor_form js_website_submit_form row" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="url_param" t-att-value="request.params.get('url_param')"/>
+                        <input type="hidden" name="form_save_redirect"
+                               t-att-value="form_save_redirect if form_save_redirect else '/profile/view#profile'"/>
+                        <input type="hidden" name="user_id" t-att-value="user.id"/>
+                        <input type="hidden" name="user.website_published" t-att-value="user.website_published"/>
+                        <input type="hidden" id="hidden_spoken_languages" name="spoken_languages_json"
+                               t-att-value="spoken_languages_json or '[]'"/>
+
+                        <input type="file" class="d-none o_forum_file_upload" name="ufile" accept="image/*"/>
+
+                        <div class="col-12 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="mb-3 col-12 d-flex justify-content-center">
+                                            <div class="col-8 col-md-6 col-xl-3">
+                                                <img class="o_forum_avatar_img w-100 mb-3 border rounded-circle"
+                                                     id="profile_avatar_img"
+                                                     t-att-src="website.image_url(user, 'avatar_128')"/>
+                                                <div class="text-center">
+                                                    <a href="#" class="o_forum_profile_pic_edit btn btn-secondary"
+                                                       aria-label="Edit">
+                                                        <i class="fa fa-pencil fa-1g float-sm-none float-md-start"
+                                                           title="Edit"/>
+                                                    </a>
+                                                    <a href="#" title="Clear" aria-label="Clear"
+                                                       class="btn border-primary o_forum_profile_pic_clear">
+                                                        <i class="fa fa-trash-o float-sm-none float-md-end"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <section class="col-12 mt-5">
+                                            <h5 class="border-bottom pb-1 mb-4">
+                                                <i class="fa fa-asterisk" aria-hidden="true"/>
+                                                Required Information
+                                            </h5>
+                                            <div class="row">
+
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="text-secondary mb-1 d-block" for="user_name">
+                                                        <i class="fa fa-user" aria-hidden="true"/>
+                                                        <span class="">Name</span>
+                                                    </label>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="name"
+                                                               id="user_name"
+                                                               required="True" t-attf-value="#{user.name}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <div t-if="email_required"
+                                                         class="alert alert-danger alert-dismissable oe_email_required"
+                                                         role="alert">
+                                                        <button type="button" class="btn-close"
+                                                                data-bs-dismiss="alert"/>
+                                                        <p>Please enter a valid email address in order to receive
+                                                            notifications
+                                                            from answers or comments.
+                                                        </p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="mb-1 text-secondary" for="user_email">
+                                                            <i class="fa fa-envelope" aria-hidden="true"/>
+                                                            <span class="">Email</span>
+                                                        </label>
+                                                        <div>
+                                                            <input type="checkbox"
+                                                                   id="profile_sharing_is_email_visible"
+                                                                   name="profile_sharing_is_email_visible"
+                                                                   t-att-checked="user.partner_id.profile_sharing_is_email_visible and 'checked' or None"/>
+                                                            <label for="profile_sharing_is_email_visible"
+                                                                   class="text-primary">Show email to members
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="email"
+                                                               id="user_email"
+                                                               required="True" t-attf-value="#{user.partner_id.email}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary">
+                                                        <i class="fa fa-flag" aria-hidden="true"/>
+                                                        <span class="">Country</span>
+                                                    </label>
+                                                    <div>
+                                                        <select class="form-select" name="country"
+                                                                id="profile_country_select" required="True">
+                                                            <option value="">Please select a country...</option>
+                                                            <t t-foreach="countries or []" t-as="country">
+                                                                <option t-att-value="country.id"
+                                                                        t-att-selected="country.id == user.partner_id.country_id.id"
+                                                                        required="True">
+                                                                    <t t-esc="country.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_timezone">
+                                                        <i class="fa fa-clock-o" aria-hidden="true"/>
+                                                        <span class="">Time Zone</span>
+                                                    </label>
+                                                    <div>
+                                                        <select class="form-select" name="tz" id="user_timezone"
+                                                                required="True">
+                                                            <option value="">Please select a time zone...</option>
+                                                            <t t-foreach="timezones or []" t-as="timezone">
+                                                                <option t-att-value="timezone"
+                                                                        t-att-selected="timezone == user.partner_id.tz">
+                                                                    <t t-esc="timezone"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_language">
+                                                        <i class="fa fa-language" aria-hidden="true"/>
+                                                        <span class="">Website Language</span>
+                                                    </label>
+                                                    <div>
+                                                        <select class="form-select" name="lang" id="user_language"
+                                                                required="True">
+                                                            <option value="">Please select a language...</option>
+                                                            <t t-foreach="languages or []" t-as="language">
+                                                                <option t-att-value="language[0]"
+                                                                        t-att-selected="language[0] == user.partner_id.lang">
+                                                                    <t t-esc="language[1]"/>
+                                                                    -
+                                                                    <t t-esc="language[2]"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <label class="mb-1 text-secondary"
+                                                                   for="spoken_language_select">
+                                                                <i class="fa fa-language" aria-hidden="true"/>
+                                                                <span class="">Spoken Languages</span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="mb-3 col-12 col-xl-6">
+                                                            <div id="no_languages_message"
+                                                                 class="text-center text-muted" style="display: none;">
+                                                                Please add at least one language
+                                                            </div>
+                                                            <ul id="spoken_language_select" class="list-group"
+                                                                style="min-height: 100px;">
+
+                                                            </ul>
+                                                        </div>
+                                                        <div class="mb-3 col-12 col-xl-6">
+                                                            <div class="row">
+                                                                <div class="col-12 d-flex align-items-start">
+                                                                    <button type="button" disabled="disabled"
+                                                                            class="btn btn-secondary me-1 align-self-end"
+                                                                            id="add_spoken_language">
+                                                                        Add
+                                                                    </button>
+                                                                    <select class="form-select me-1" name="spoken_lang"
+                                                                            id="spoken_language_index_select">
+                                                                    </select>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-text">
+                                                                            <i class="fa fa-search" aria-hidden="true"/>
+                                                                        </span>
+                                                                        <input type="text" class="form-control"
+                                                                               id="spoken_language_search"
+                                                                               placeholder="Search"/>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mt-2">
+                                                                <div class="col-12">
+                                                                    <select class="form-select" name="spoken_lang"
+                                                                            id="spoken_language_list_select" size="6">
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section class="col-12 mt-5">
+                                            <h5 class="border-bottom pb-1 mb-4">
+                                                <i class="fa fa-phone" aria-hidden="true"/>
+                                                Contact Details
+                                            </h5>
+                                            <div class="row">
+
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="mb-1 text-secondary" for="user_mobile">
+                                                            <i class="fa fa-mobile" aria-hidden="true"/>
+                                                            <span class="">Mobile</span>
+                                                        </label>
+                                                        <div>
+                                                            <input type="checkbox"
+                                                                   id="profile_sharing_is_mobile_visible"
+                                                                   name="profile_sharing_is_mobile_visible"
+                                                                   t-att-checked="user.partner_id.profile_sharing_is_mobile_visible and 'checked' or None"/>
+                                                            <label for="profile_sharing_is_mobile_visible"
+                                                                   class="text-primary">Show mobile to members
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="mobile"
+                                                               id="user_mobile"
+                                                               t-attf-value="#{user.partner_id.mobile or ''}"/>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="mb-1 text-secondary" for="user_phone">
+                                                            <i class="fa fa-phone" aria-hidden="true"/>
+                                                            <span class="">Phone</span>
+                                                        </label>
+                                                        <div>
+                                                            <input type="checkbox"
+                                                                   id="profile_sharing_is_phone_visible"
+                                                                   name="profile_sharing_is_phone_visible"
+                                                                   t-att-checked="user.partner_id.profile_sharing_is_phone_visible and 'checked' or None"/>
+                                                            <label for="profile_sharing_is_phone_visible"
+                                                                   class="text-primary">Show phone to members
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="phone"
+                                                               id="user_phone"
+                                                               t-attf-value="#{user.partner_id.phone or ''}"/>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_personal_website">
+                                                        <i class="fa fa-globe" aria-hidden="true"/>
+                                                        <span class="">Personal Website</span>
+                                                    </label>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="personal_website"
+                                                               id="user_personal_website"
+                                                               t-attf-value="#{user.partner_id.personal_website or ''}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_business_website">
+                                                        <i class="fa fa-briefcase" aria-hidden="true"/>
+                                                        <span class="">Business Website</span>
+                                                    </label>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="website"
+                                                               id="user_business_website"
+                                                               t-attf-value="#{user.partner_id.website or ''}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                        <section class="col-12 mt-5">
+                                            <h5 class="border-bottom pb-1 mb-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <i class="fa fa-home" aria-hidden="true"/>
+                                                        Address
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox"
+                                                               id="profile_sharing_is_address_visible"
+                                                               name="profile_sharing_is_address_visible"
+                                                               t-att-checked="user.partner_id.profile_sharing_is_address_visible and 'checked' or None"/>
+                                                        <label for="profile_sharing_is_address_visible"
+                                                               class="text-primary fs-6">Show address to members
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </h5>
+
+                                            <div class="row">
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_street">
+                                                        <i class="fa fa-road" aria-hidden="true"/>
+                                                        <span class="">Street</span>
+                                                    </label>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="street"
+                                                               id="user_street"
+                                                               t-attf-value="#{user.partner_id.street or ''}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_street2">
+                                                        <i class="fa fa-road" aria-hidden="true"/>
+                                                        <span class="">Street 2</span>
+                                                    </label>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="street2"
+                                                               id="user_street2"
+                                                               t-attf-value="#{user.partner_id.street2 or ''}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_zip">
+                                                        <i class="fa fa-map-pin" aria-hidden="true"/>
+                                                        <span class="">Zip</span>
+                                                    </label>
+                                                    <div>
+                                                        <input type="text" class="form-control" name="zip" id="user_zip"
+                                                               t-attf-value="#{user.partner_id.zip or ''}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <label class="mb-1 text-secondary" for="user_city">
+                                                            <i class="fa fa-building" aria-hidden="true"/>
+                                                            <span class="">City</span>
+                                                        </label>
+                                                        <div>
+                                                            <input type="checkbox"
+                                                                   id="profile_sharing_is_city_visible"
+                                                                   name="profile_sharing_is_city_visible"
+                                                                   t-att-checked="user.partner_id.profile_sharing_is_city_visible and 'checked' or None"/>
+                                                            <label for="profile_sharing_is_city_visible"
+                                                                   class="text-primary">Show city to members
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="text" class="form-control" name="city"
+                                                               id="user_city"
+                                                               t-attf-value="#{user.partner_id.city or ''}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="mb-1 text-secondary" for="user_state">
+                                                        <i class="fa fa-map" aria-hidden="true"/>
+                                                        <span class="">State</span>
+                                                    </label>
+                                                    <div>
+                                                        <select class="form-select" name="state" disabled="disabled"
+                                                                id="profile_state_select">
+                                                            <option value="">Please select a state...</option>
+                                                            <t t-foreach="states or []" t-as="state">
+                                                                <option t-att-value="state.id"
+                                                                        t-att-selected="state.id == user.partner_id.state_id.id">
+                                                                    <t t-esc="state.name"/>
+                                                                </option>
+                                                            </t>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </section>
+
+                                        <section class="col-12 mt-5">
+                                            <h5 class="border-bottom pb-1 mb-4">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <i class="fa fa-map" aria-hidden="true"/>
+                                                        Map Location
+                                                    </div>
+                                                    <div>
+                                                        <input type="checkbox"
+                                                               id="profile_sharing_is_map_visible"
+                                                               name="profile_sharing_is_map_visible"
+                                                               t-att-checked="user.partner_id.profile_sharing_is_map_visible and 'checked' or None"/>
+                                                        <label for="profile_sharing_is_map_visible"
+                                                               class="text-primary fs-6">Show map location to members
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </h5>
+
+                                            <div class="mb-3 col-12">
+                                                <t t-if="user.partner_id.partner_latitude and user.partner_id.partner_longitude">
+                                                    <t t-set="bbox_value" t-value="1.80"/>
+                                                    <embed
+                                                            t-att-src="'https://www.openstreetmap.org/export/embed.html?bbox=' + str(user.partner_id.partner_longitude - bbox_value) + ',' + str(user.partner_id.partner_latitude - bbox_value) + ',' + str(user.partner_id.partner_longitude + bbox_value) + ',' + str(user.partner_id.partner_latitude + bbox_value) + '&amp;layer=mapnik&amp;marker=' + str(user.partner_id.partner_latitude) + ',' + str(user.partner_id.partner_longitude) + '&amp;zoom=15'"
+                                                            width="100%" height="300"
+                                                            style="border:1px solid black;">
+                                                    </embed>
+                                                </t>
+                                            </div>
+
+                                        </section>
+
+                                        <section class="col-12 mt-5">
+                                            <h5 class="border-bottom pb-1 mb-4">
+                                                <i class="fa fa-user" aria-hidden="true"/>
+                                                About You
+                                            </h5>
+                                            <div class="row">
+
+                                                <div class="mb-3 col-12">
+                                                    <label class="mb-1 text-secondary" for="description">
+                                                        <i class="fa fa-book" aria-hidden="true"/>
+                                                        <span class="">Biography</span>
+                                                    </label>
+                                                    <textarea name="description" id="description"
+                                                              style="min-height: 250px"
+                                                              class="form-control o_wysiwyg_loader">
+                                                        <t t-esc="user.partner_id.website_description"/>
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-secondary o_wprofile_submit_btn">
+                                                Update
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

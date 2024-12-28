@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+       <template id="my_account_link" name="Link to frontend portal" inherit_id="portal.user_dropdown">
+    <xpath expr="//a[@href='/my/home']" position="replace">
+        <a d="userProfileLink" href="/profile/view#profile" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-id-card-o me-1 small text-primary"/> My Profile
+        </a>
+        <a d="userProfileSettingsLink" href="/profile/view#settings" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-cog me-1 small text-primary"/> My Settings
+        </a>
+        <a d="userProfileChangePasswordLink" href="/profile/change_password" role="menuitem" class="dropdown-item ps-3">
+            <i class="fa fa-fw fa-lock me-1 small text-primary"/> Change Password
+        </a>
+    </xpath>
+</template>
+
+</odoo>

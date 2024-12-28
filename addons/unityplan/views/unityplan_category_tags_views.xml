@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- actions opening views on models -->
+        <record id="unityplan_category_tags_action" model="ir.actions.act_window">
+            <field name="name">Category Tags List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unityplan.category.tag</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No category tags Found!
+                </p>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record id="unityplan_admin_menu_configuration_tags_tree_view" model="ir.ui.view">
+            <field name="name">unityplan.category.tag.tree.view</field>
+            <field name="model">unityplan.category.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Category Tags">
+                    <field name="group_sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="parent_id" />
+                    <field name="child_id" />
+                    <field name="is_published" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="unityplan_admin_menu_configuration_tags_form_view" model="ir.ui.view">
+            <field name="name">unityplan.category.tag.form.view</field>
+            <field name="model">unityplan.category.tag</field>
+            <field name="arch" type="xml">
+                <form string="Category Tag">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Category Name"/>
+                            <h1><field name="name" default_focus="1" placeholder="Name of category"/></h1>
+                            <label for="description" string="Description"/>
+                            <field name="description"/><br/>
+                        </div>
+                        <group>
+                            <field name="is_published"/>
+                            <field name="parent_id" colspan="2"/>
+                            <field name="sequence"/>
+                            <field name="color" string="Color" widget="color_picker"/>
+                            <field name="group_sequence" invisible="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

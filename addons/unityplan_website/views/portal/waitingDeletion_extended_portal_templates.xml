@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="frontend_layout" name="Main Frontend Layout" inherit_id="web.frontend_layout">
+
+    </template>
+
+    <template id="my_account_link" name="Link to frontend portal" inherit_id="portal.user_dropdown">
+        <xpath expr="//*[@class='dropdown-item ps-3']" position="replace" >
+        </xpath>
+<!--        <xpath expr="//*[@id='o_logout_divider']" position="before">-->
+<!--            <a href="/my/home" role="menuitem" class="dropdown-item ps-3">-->
+<!--                <i class="fa fa-fw fa-id-card-o me-1 small text-muted"/> My Account updated-->
+<!--            </a>-->
+<!--        </xpath>-->
+    </template>
+
+    <!-- ========== CHANGE PASSWORD PAGE ========== -->
+    <template id="profile_change_password" name="Account Security">
+        <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="o_wprofile_wrap mt-0">
+                <t t-call="unityplan_website.profile_change_password_header"/>
+                <t t-call="unityplan_website.profile_change_password_content"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- ========== CONFIGURE TOTP PAGE ========== -->
+    <template id="profile_configure_totp" name="Configure TOTP">
+        <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="o_wprofile_wrap mt-0">
+                <t t-call="unityplan_website.profile_configure_totp_header"/>
+                <t t-call="unityplan_website.profile_configure_totp_content"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- ========== DEACTIVATE ACCOUNT PAGE ========== -->
+    <template id="profile_deactivate_account" name="Deactivate Account">
+        <t t-set="body_classname" t-value="'o_wprofile_body'"/>
+        <t t-call="website.layout">
+            <div id="wrap" class="o_wprofile_wrap mt-0">
+                <t t-call="unityplan_website.profile_deactivate_account_header"/>
+                <t t-call="unityplan_website.profile_deactivate_account_content"/>
+            </div>
+        </t>
+    </template>
+
+
+    <!-- ========== CHANGE PASSWORD PAGE HEADER ========== -->
+    <template id="profile_change_password_header" name="Change Password Page Header">
+        <div class="o_wprofile_header o_wprofile_gradient position-relative text-white">
+            <t t-call="unityplan_website.user_profile_sub_nav">
+                <t t-set="view_user">Change Password</t>
+            </t>
+            <div class="container pb-3 pb-md-0 pt-2 pt-md-5">
+                <div class="row">
+                    <!-- ==== Header Left ==== -->
+                    <div class="col-12 col-md-4 col-lg-3">
+
+                    </div>
+                    <!-- ==== Header Right ==== -->
+                    <div class="col-12 col-md-8 col-lg-9 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h1 class="o_card_people_name">
+                                Account security
+                            </h1>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center flex-grow-1 mb-0 mb-md-5">
+                            <div class="lead mb-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+        <!-- ========== TOTP ENABLE PAGE HEADER ========== -->
+    <template id="profile_configure_totp_header" name="Configure TOTP Page Header">
+        <div class="o_wprofile_header o_wprofile_gradient position-relative text-white">
+            <t t-call="unityplan_website.user_profile_sub_nav">
+                <t t-set="view_user">Two-factor authentication</t>
+            </t>
+            <div class="container pb-3 pb-md-0 pt-2 pt-md-5">
+                <div class="row">
+                    <!-- ==== Header Left ==== -->
+                    <div class="col-12 col-md-4 col-lg-3">
+
+                    </div>
+                    <!-- ==== Header Right ==== -->
+                    <div class="col-12 col-md-8 col-lg-9 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h1 class="o_card_people_name">
+                                Account security
+                            </h1>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center flex-grow-1 mb-0 mb-md-5">
+                            <div class="lead mb-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+        <!-- ========== DEACTIVATE ACCOUNT PAGE HEADER ========== -->
+    <template id="profile_deactivate_account_header" name="Change Password Page Header">
+        <div class="o_wprofile_header o_wprofile_gradient position-relative text-white">
+            <t t-call="website_profile.user_profile_sub_nav">
+                <t t-set="view_user">Deactivate Account</t>
+            </t>
+            <div class="container pb-3 pb-md-0 pt-2 pt-md-5">
+                <div class="row">
+                    <!-- ==== Header Left ==== -->
+                    <div class="col-12 col-md-4 col-lg-3">
+
+                    </div>
+                    <!-- ==== Header Right ==== -->
+                    <div class="col-12 col-md-8 col-lg-9 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <h1 class="o_card_people_name">
+                                Account security
+                            </h1>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center flex-grow-1 mb-0 mb-md-5">
+                            <div class="lead mb-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ========== CHANGE PASSWORD PAGE CONTENT ========== -->
+    <template id="profile_change_password_content">
+        <div class="o_portal_security_body">
+            <t t-set="additional_title">Change Password</t>
+            <t t-set="no_breadcrumbs" t-value="1"/>
+            <div class="alert alert-danger" role="alert" t-if="get_error(errors)">
+                <t t-esc="errors"/>
+            </div>
+            <section name="portal_change_password">
+                <h3>Change Password</h3>
+                <t t-set="path">password</t>
+                <div class="alert alert-success" role="alert" t-if="success and success.get('password')">
+                    Password Updated!
+                </div>
+                <div class="alert alert-danger" role="alert" t-if="get_error(errors, 'password')">
+                    <t t-esc="errors['password']"/>
+                </div>
+                <form action="/profile/change_password" method="post" class="oe_reset_password_form">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="op" value="password"/>
+                    <div class="mb-3">
+                        <label for="current">Password:</label>
+                        <input type="password" t-attf-class="form-control form-control-sm {{ 'is-invalid' if get_error(errors, 'password.old') else '' }}"
+                               id="current" name="old"
+                               autocomplete="current-password" required="required"/>
+                        <div class="invalid-feedback">
+                            <t t-esc="get_error(errors, 'password.old')"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new">New Password:</label>
+                        <input type="password" t-attf-class="form-control form-control-sm {{ 'is-invalid' if get_error(errors, 'password.new1') else '' }}"
+                               id="new" name="new1"
+                               autocomplete="new-password" required="required"/>
+                        <div class="invalid-feedback">
+                            <t t-esc="get_error(errors, 'password.new1')"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new2">Verify New Password:</label>
+                        <input type="password" t-attf-class="form-control form-control-sm {{ 'is-invalid' if get_error(errors, 'password.new2') else '' }}"
+                               id="new2" name="new2"
+                               autocomplete="new-password" required="required"/>
+                        <div class="invalid-feedback">
+                            <t t-esc="get_error(errors, 'password.new2')"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="me-3 btn btn-secondary">Change Password</button>
+                        <a class="btn btn-secondary d-none d-md-inline-block" t-attf-href="/profile/user">
+                            Back to user profile
+                        </a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </template>
+
+    <!-- ========== CONFIGURE TOTP PAGE CONTENT ========== -->
+    <template id="profile_configure_totp_content">
+        <div class="o_portal_security_body">
+            <t t-set="additional_title">Two-factor authentication</t>
+            <t t-set="no_breadcrumbs" t-value="1"/>
+<!--            <div class="alert alert-danger" role="alert" t-if="get_error(errors)">-->
+<!--                <t t-esc="errors"/>-->
+<!--            </div>-->
+             <!--
+                portal users don't have access to non-qweb views anymore, so
+                embed the target view as a *data island* of sorts, a JSON embed
+                of the fields_view_get could have been nice but at 14k it'd be a
+                bit ridiculous
+            -->
+            <div class="d-none" id="totp_wizard_view">
+                <t t-esc="env.ref('auth_totp.view_totp_wizard').sudo().get_combined_arch()"/>
+            </div>
+            <section>
+                <h3>
+                    Two-factor authentication
+                    <a href="https://www.odoo.com/documentation/16.0/applications/general/auth/2fa.html" target="_blank">
+                        <i title="Documentation" class="fa fa-fw o_button_icon fa-info-circle"></i>
+                    </a>
+                </h3>
+                <t t-if="not user_id.totp_enabled">
+                    <div class="alert alert-secondary" role="status">
+                        <i class="fa fa-warning"/>
+                        Two-factor authentication not enabled
+                    </div>
+                    <button type="button" class="btn btn-secondary" id="auth_totp_portal_enable">
+                        Enable two-factor authentication
+                    </button>
+                </t>
+                <t t-else="">
+                    <span class="text-success">
+                        <i class="fa fa-check-circle"/>
+                        Two-factor authentication enabled
+                    </span>
+                    <button type="button" class="btn btn-link" id="auth_totp_portal_disable">
+                        (Disable two-factor authentication)
+                    </button>
+                    <t t-if="len(user_id.totp_trusted_device_ids)">
+                        <table class="table o_main_table">
+                            <thead>
+                                <tr>
+                                    <th><strong>Trusted Device</strong></th>
+                                    <th><strong>Added On</strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="user_id.totp_trusted_device_ids" t-as="td">
+                                    <td>
+                                        <span t-field="td.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="td.create_date"/>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-trash text-danger" type="button" t-att-id="td.id"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary" type="button" id="auth_totp_portal_revoke_all_devices">
+                            Revoke All
+                        </button>
+                    </t>
+                </t>
+                <div class="mb-3 mt-5">
+                    <a class="btn btn-secondary d-none d-md-inline-block" t-attf-href="/profile/user">
+                        Back to user profile
+                    </a>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- ========== DEACTIVATE ACCOUNT PAGE CONTENT ========== -->
+    <template id="profile_deactivate_account_content">
+        <div class="o_portal_security_body">
+            <t t-set="additional_title">Security</t>
+            <t t-set="no_breadcrumbs" t-value="1"/>
+            <div class="alert alert-danger" role="alert" t-if="get_error(errors)">
+                <t t-esc="errors"/>
+            </div>
+            <section name="portal_deactivate_account" groups="base.group_portal">
+                <h3>Delete Account</h3>
+                <t t-set="deactivate_error" t-value="get_error(errors, 'deactivate')"/>
+                <button class="btn btn-secondary" data-bs-toggle="modal"
+                    data-bs-target="#portal_deactivate_account_modal">
+                    Delete Account
+                </button>
+                <div t-attf-class="modal #{'show d-block' if open_deactivate_modal else ''}"
+                    id="portal_deactivate_account_modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-danger">
+                                <h5 class="modal-title">Are you sure you want to do this?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <form action="/profile/deactivate_account" method="post" class="modal-body"
+                                id="portal_deactivate_account_form">
+                                <div>
+                                    <div class="alert alert-danger"
+                                        t-esc="get_error(errors, 'deactivate.other')"/>
+                                    <p class="text-muted">
+                                        Disable your account, preventing any further login.<br/>
+                                        <b>
+                                            <i class="fa fa-exclamation-triangle text-danger"></i>
+                                            This action cannot be undone.
+                                        </b>
+                                    </p>
+                                    <hr/>
+                                    <p>1. Enter your password to confirm you own this account</p>
+                                    <input name="password" type="password" required="1"
+                                        t-attf-class="form-control #{'is-invalid' if deactivate_error == 'password' else ''}"
+                                        placeholder="Password"/>
+                                    <div t-if="deactivate_error == 'password'" class="invalid-feedback">
+                                        Wrong password.
+                                    </div>
+                                    <hr/>
+                                    <p>
+                                        2. Confirm you want to delete your account by
+                                        copying down your login (<t t-esc="env.user.login"/>).
+                                    </p>
+                                    <input name="validation" type="text" required="1"
+                                        t-attf-class="form-control #{'is-invalid' if deactivate_error == 'validation' else ''}"/>
+                                    <div t-if="deactivate_error == 'validation'" class="invalid-feedback">
+                                        You should enter "<t t-esc="env.user.login"/>" to validate your action.
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center">
+                                        <input type="checkbox" name="request_blacklist" id="request_blacklist" checked="1"/>
+                                        <label for="request_blacklist" class="ms-2 mw-100 fw-normal mt-3">
+                                            Put my email and phone in a block list to make sure I'm never contacted again
+                                        </label>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            </form>
+                            <div class="modal-footer justify-content-start">
+                                <input type="submit" class="btn btn-danger" form="portal_deactivate_account_form"
+                                    value="Delete Account"/>
+                                <button type="button" class="btn" data-bs-dismiss="modal">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 mt-5">
+                    <a class="btn btn-secondary d-none d-md-inline-block" t-attf-href="/profile/user">
+                        Back to user profile
+                    </a>
+                </div>
+            </section>
+        </div>
+    </template>
+</odoo>

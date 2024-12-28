@@ -1,0 +1,29 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Create groups -->
+        <record id="group_code_of_conduct_completed" model="res.groups">
+            <field name="name">Code Of Conduct [Completed]</field>
+            <field name="comment">This group is used to indicate that the user has completed the code of conduct</field>
+        </record>
+
+        <record id="group_code_of_conduct_not_completed" model="res.groups">
+            <field name="name">Code Of Conduct [Not Completed]</field>
+            <field name="comment">This group is used to indicate that the user has NOT completed the code of conduct</field>
+        </record>
+
+        <record id="group_feature_preview" model="res.groups">
+            <field name="name">Feature Preview</field>
+            <field name="comment">This group is used to preview new features</field>
+        </record>
+
+        <!-- Add administrator to the group_code_of_conduct_completed group -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('group_code_of_conduct_completed'))]"/>
+        </record>
+
+        <!-- Add administrator to the group_feature_preview group -->
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('group_feature_preview'))]"/>
+        </record>
+    </data>
+</odoo>

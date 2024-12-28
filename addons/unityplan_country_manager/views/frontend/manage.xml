@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="country_manager_manage_users_page" name="Manage Users">
+        <t t-call="website.layout">
+            <div id="country_manager_manage_users_app" class="container">
+                <div class="my-5">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="card text-dark bg-light border-light mb-3">
+                                <div class="card-header">
+
+                                    <div class="row my-4">
+                                        <div class="col-md-3">
+                                            <div>
+                                                <div class="text-center">
+                                                    <i class="fa fa-users fa-3x text-primary"></i>
+                                                </div>
+                                                <h5 class="text-uppercase fw-bold text-secondary mt-1 text-center">
+                                                    Manage Members
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <input type="text" id="search_field" class="form-control"
+                                                       placeholder="Search Users"/>
+                                            </div>
+                                            <div class="d-flex justify-content-center mt-2">
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           id="filterEmailNotVerified"/>
+                                                    <label class="form-check-label" for="filterEmailNotVerified">
+                                                        <span class="badge rounded-pill text-bg-warning">EMAIL NOT
+                                                            VERIFIED
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           id="filterNeverConnected"/>
+                                                    <label class="form-check-label" for="filterNeverConnected">
+                                                        <span class="badge rounded-pill text-bg-info">NEVER CONNECTED
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           id="filterAccountInactive"/>
+                                                    <label class="form-check-label" for="filterAccountInactive">
+                                                        <span class="badge rounded-pill text-bg-danger">ACCOUNT INACTIVE
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 d-flex justify-content-end">
+                                            <div class="form-check me-3">
+                                                <select class="form-select" id="countryFilter" style="width: 125px;">
+                                                    <!-- Options will be populated by JavaScript -->
+                                                </select>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-secondary btn-circle"
+                                                        id="createUser">
+                                                    <i class="fa fa-user-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table no-wrap user-table mb-0 table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium pl-4">#
+                                                    </th>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium">Name
+                                                        <br/>
+                                                        Email
+                                                    </th>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium">Location
+                                                        <br/>Country
+                                                    </th>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium">
+                                                        Language
+                                                        <br/>Time Zone
+                                                    </th>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium">Status
+                                                        <br/>
+                                                        Verified
+                                                    </th>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium">Date
+                                                        Added
+                                                        <br/>
+                                                        Has Logged in?
+                                                    </th>
+                                                    <th scope="col" class="border-0 text-uppercase font-medium">
+                                                        Community
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="users">
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="col-md-12 mt-2">
+                                        <nav aria-label="Page navigation">
+                                            <ul class="pagination justify-content-center"
+                                                id="pagination-controls"></ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
+                     aria-labelledby="editUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h5 class="modal-title" id="editUserModalLabel">MANAGE USER ACCOUNT</h5>
+                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row mx-3">
+                                    <div class="col-md-12">
+                                        <form id="editUserForm">
+                                            <div class="row">
+                                                <div class="col-md-12 hide-for-create-user">
+                                                    <hr class="my-4"/>
+                                                    <h6 class="text-uppercase fw-bold">User Actions</h6>
+                                                    <div class="mb-3">
+                                                        <div id="edit_user_modal_send_invite_checkbox" class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="sendInvitationEmail"/>
+                                                            <label class="form-check-label" for="sendInvitationEmail"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                   title="Send invitation email again">
+                                                                <i class="fa fa-user-plus text-success"></i>
+                                                                Send invitation email again
+                                                            </label>
+                                                        </div>
+                                                        <div id="edit_user_modal_reset_password_checkbox" class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="sendResetPasswordEmail"/>
+                                                            <label class="form-check-label" for="sendResetPasswordEmail"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                   title="Send reset password email">
+                                                                <i class="fa fa-unlock text-success"></i>
+                                                                Send reset password email
+                                                            </label>
+                                                        </div>
+                                                        <div id="edit_user_modal_code_of_conduct_checkbox" class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="requestCodeOfConduct"/>
+                                                            <label class="form-check-label" for="requestCodeOfConduct"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                   title="Request user to take Code of Conduct course again">
+                                                                <i class="fa fa-gavel text-warning"></i>
+                                                                Request user to take Code of Conduct course again
+                                                            </label>
+                                                        </div>
+                                                        <div id="edit_user_modal_disable_user_checkbox" class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="blockUser"/>
+                                                            <label class="form-check-label" for="blockUser"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                   title="Block the user from logging in to the site.">
+                                                                <i class="fa fa-ban text-danger"></i>
+                                                                Block the user from logging in to the site.
+                                                            </label>
+                                                        </div>
+                                                        <div id="edit_user_modal_enable_user_checkbox" class="form-check hidden">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                   id="enableUser"/>
+                                                            <label class="form-check-label" for="enableUser"
+                                                                   data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                   title="Activate account so the user can log in to the site again">
+                                                                <i class="fa fa-check-circle text-success"></i>
+                                                                Activate account so the user can log in to the site again.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row hide-for-create-user">
+                                                <hr class="my-4"/>
+                                                <h6 class="text-uppercase fw-bold">User Information</h6>
+                                                <div class="col-md-12 mb-3 d-none edite_user_massage_wrapper">
+
+                                                    <span id="edit_user_modal_show_user_disabled_text" class="text-muted small">
+                                                        <i class="fa fa-ban text-danger"> </i>
+                                                        <span class="edit_user_massage">
+                                                            This user is blocked from logging in.
+                                                        </span>
+                                                        <br />
+                                                    </span>
+
+
+                                                    <span id="edit_user_modal_show_user_logged_in_text" class="text-muted small">
+                                                        <i class="fa fa-info text-success"> </i>
+                                                        <span class="edit_user_massage text">
+                                                            This user have logged in. <br />The information below can only be
+                                                            edited by the user itself after first login.
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 hide-for-create-user">
+                                                    <div class="mb-3">
+                                                        <label for="readonlyUserName"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-sign-in"></i>
+                                                            LOGIN NAME
+                                                        </label>
+                                                        <input type="text" class="form-control" id="readonlyUserName"
+                                                               required="required" disabled="disabled"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 hide-for-create-user">
+                                                    <div class="mb-3">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserName"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-user"></i>
+                                                            NAME
+                                                        </label>
+                                                        <input type="text" class="form-control" id="editUserName"
+                                                               required="required"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserEmail"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-envelope"></i>
+                                                            E-MAIL
+                                                        </label>
+                                                        <input type="email" class="form-control" id="editUserEmail"
+                                                               disabled="disabled"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row hide-for-create-user">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserPhone"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-phone"></i>
+                                                            PHONE
+                                                        </label>
+                                                        <input type="text" class="form-control" id="editUserPhone"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserZip"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-map-marker"></i>
+                                                            ZIP
+                                                        </label>
+                                                        <input type="text" class="form-control" id="editUserZip"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row hide-for-create-user">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserCity"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-building"></i>
+                                                            CITY
+                                                        </label>
+                                                        <input type="text" class="form-control" id="editUserCity"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserCountry"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-globe"></i>
+                                                            COUNTRY
+                                                        </label>
+                                                        <select class="form-control" id="editUserCountry"
+                                                                required="required"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row hide-for-create-user">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserTz"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-calendar"></i>
+                                                            TIME ZONE
+                                                        </label>
+                                                        <select class="form-control" id="editUserTz"></select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="editUserLang"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-language"></i>
+                                                            LANGUAGE
+                                                        </label>
+                                                        <select class="form-control" id="editUserLang"
+                                                                required="required"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--                                            <div class="row">-->
+                                            <!--                                                <div class="col-md-12">-->
+                                            <!--                                                    <div class="mb-3">-->
+                                            <!--                                                        <label for="editUserComment"-->
+                                            <!--                                                               class="text-secondary form-label fw-bold">-->
+                                            <!--                                                            <i class="fa fa-comment"></i>-->
+                                            <!--                                                            NOTES-->
+                                            <!--                                                            <span class="small text-muted fw-normal">(this field is not-->
+                                            <!--                                                                visible to the user)-->
+                                            <!--                                                            </span>-->
+                                            <!--                                                        </label>-->
+                                            <!--                                                        <div id="comment_textarea_wrapper">-->
+                                            <!--                                                            <textarea name="content" t-attf-id="content-#{str(user_comment_id)}" class="form-control o_wysiwyg_loader" minlength="50"/>*-->
+                                            <!--                                                        </div>-->
+                                            <!--                                                    </div>-->
+                                            <!--                                                </div>-->
+                                            <!--                                            </div>-->
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    <i class="fa fa-times-circle"></i>
+                                    CLOSE
+                                </button>
+                                <button type="button" class="btn btn-primary" id="saveUserChanges">
+                                    <i class="fa fa-check"></i>
+                                    SAVE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="createUserModal" tabindex="-1" role="dialog"
+                     aria-labelledby="createUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-primary">
+                                <h5 class="modal-title" id="createUserModalLabel">CREATE USER ACCOUNT</h5>
+                                <button type="button" class="btn-close text-white" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row mx-3">
+                                    <div class="col-md-12">
+                                        <form id="createUserForm">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="createUserName"
+                                                               class="text-secondary form-label fw-bold">
+                                                            <i class="fa fa-user"></i>
+                                                            NAME
+                                                        </label>
+                                                        <input type="text" class="form-control" id="createUserName"
+                                                               required="required"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="createUserEmail"
+                                                               class="text-secondary form-label fw-bold">
+                                                            <i class="fa fa-envelope"></i>
+                                                            E-MAIL
+                                                        </label>
+                                                        <input type="email" class="form-control" id="createUserEmail"
+                                                            required="required" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="mb-3">
+                                                        <label for="createUserCountry"
+                                                               class="text-secondary form-label fw-bold disable-on-readonly">
+                                                            <i class="fa fa-globe"></i>
+                                                            COUNTRY
+                                                        </label>
+                                                        <select class="form-control" id="createUserCountry"
+                                                                required="required"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    <i class="fa fa-times-circle"></i>
+                                    CLOSE
+                                </button>
+                                <button type="button" class="btn btn-primary" id="createUserButton">
+                                    <i class="fa fa-check"></i>
+                                    CREATE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- MANAGE MEMBERS LINK IN USER MENU -->
+    <template id="country_manager_manage_members_link" name="Country Manager - Link to manage users"
+              inherit_id="portal.user_dropdown">
+        <xpath expr="//*[@id='o_logout_divider']" position="before">
+            <t t-if="request.env.user.is_country_manager">
+                <hr id="countryManagerDivider" class="dropdown-divider"/>
+                <a id="countryManagerManageMembersLink" href="/cm/manage" role="menuitem" class="dropdown-item ps-3">
+                    <i class="fa fa-users me-1 small text-primary"></i>
+                    Manage Members
+                </a>
+            </t>
+        </xpath>
+    </template>
+
+
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- // Example country data
+        <record id="ar" model="res.country">
+            <field name="name">Argentina</field>
+            <field name="code">ar</field>
+            <field name='state_required'>1</field>
+            <field name="currency_id" ref="ARS" />
+            <field eval="54" name="phone_code" />
+            <field name="vat_label">CUIT</field>
+            <field eval="'%(street)s\n%(street2)s\n%(city)s %(state_name)s %(zip)s\n%(country_name)s'" name="address_format"/>
+        </record>
+
+        <record id="au" model="res.country">
+            <field name="name">Australia</field>
+            <field name="code">au</field>
+            <field name='state_required'>1</field>
+            <field eval="'%(street)s\n%(street2)s\n%(city)s %(state_code)s %(zip)s\n%(country_name)s'" name="address_format" />
+            <field name="currency_id" ref="AUD" />
+            <field eval="61" name="phone_code" />
+            <field name="vat_label">ABN</field>
+        </record>
+        -->
+
+
+<!--        <record id="n1" model="res.country">
+            <field name="name">NationName01</field>
+            <field name="code">aa</field>
+            <field name="territory_type">first_nation</field>
+        </record>
+        <record id="n2" model="res.country">
+            <field name="name">NationName02</field>
+            <field name="code">ab</field>
+            <field name="territory_type">first_nation</field>
+        </record>
+        <record id="n3" model="res.country">
+            <field name="name">NationName03</field>
+            <field name="code">ac</field>
+            <field name="territory_type">first_nation</field>
+        </record>
+        <record id="n4" model="res.country">
+            <field name="name">NationName04</field>
+            <field name="code">ad</field>
+            <field name="territory_type">first_nation</field>
+        </record>
+
+        <record id="first_nations" model="res.country.group">
+            <field name="name">First Nations</field>
+            <field name="country_ids" eval="[Command.set([
+                ref('n1'),ref('n2'),ref('n3'),ref('n4')])]"/>
+        </record>-->
+
+        <!-- // Example country group data
+        <record id="europe" model="res.country.group">
+            <field name="name">Europe</field>
+            <field name="country_ids" eval="[Command.set([
+                ref('at'),ref('be'),ref('bg'),ref('hr'),ref('cy'),
+                ref('cz'),ref('dk'),ref('ee'),ref('fi'),ref('fr'),
+                ref('de'),ref('gr'),ref('hu'),ref('ie'),ref('it'),
+                ref('lv'),ref('lt'),ref('lu'),ref('mt'),ref('nl'),
+                ref('pl'),ref('pt'),ref('ro'),ref('sk'),ref('si'),
+                ref('es'),ref('se')])]"/>
+        </record>
+        -->
+
+    </data>
+</odoo>

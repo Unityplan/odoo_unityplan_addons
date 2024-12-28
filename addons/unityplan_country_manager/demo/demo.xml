@@ -1,0 +1,247 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Create a new user based on the portal template user -->
+        <record id="new_portal_user_1" model="res.users">
+            <field name="name">Portal Demo User 1</field>
+            <field name="login">new_portal_user_1@techzone.dk</field>
+            <field name="email">new_portal_user_1@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_2" model="res.users">
+            <field name="name">Portal Demo User 2</field>
+            <field name="login">new_portal_user_2@techzone.dk</field>
+            <field name="email">new_portal_user_2@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_3" model="res.users">
+            <field name="name">Portal Demo User 3</field>
+            <field name="login">new_portal_user_3@techzone.dk</field>
+            <field name="email">new_portal_user_3@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_4" model="res.users">
+            <field name="name">Portal Demo User 4</field>
+            <field name="login">new_portal_user_4@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_5" model="res.users">
+            <field name="name">Portal Demo User 5</field>
+            <field name="login">new_portal_user_5@techzone.dk</field>
+            <field name="email">new_portal_user_5@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_6" model="res.users">
+            <field name="name">Portal Demo User 6</field>
+            <field name="login">new_portal_user_6@techzone.dk</field>
+            <field name="email">new_portal_user_6@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.us"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_7" model="res.users">
+            <field name="name">Portal Demo User 7</field>
+            <field name="login">new_portal_user_7@techzone.dk</field>
+            <field name="email">new_portal_user_7@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.us"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_8" model="res.users">
+            <field name="name">Portal Demo User 8</field>
+            <field name="login">new_portal_user_8@techzone.dk</field>
+            <field name="email">new_portal_user_8@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_9" model="res.users">
+            <field name="name">Portal Demo User 9</field>
+            <field name="login">new_portal_user_9@techzone.dk</field>
+            <field name="email">new_portal_user_9@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_10" model="res.users">
+            <field name="name">Portal Demo User 10</field>
+            <field name="login">new_portal_user_10@techzone.dk</field>
+            <field name="email">new_portal_user_10@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_11" model="res.users">
+            <field name="name">Portal Demo User 11</field>
+            <field name="login">new_portal_user_11@techzone.dk</field>
+            <field name="email">new_portal_user_11@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_12" model="res.users">
+            <field name="name">Portal Demo User 12</field>
+            <field name="login">new_portal_user_12@techzone.dk</field>
+            <field name="email">new_portal_user_12@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_13" model="res.users">
+            <field name="name">Portal Demo User 13</field>
+            <field name="login">new_portal_user_13@techzone.dk</field>
+            <field name="email">new_portal_user_13@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.us"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_14" model="res.users">
+            <field name="name">Portal Demo User 14</field>
+            <field name="login">new_portal_user_14@techzone.dk</field>
+            <field name="email">new_portal_user_14@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.us"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_15" model="res.users">
+            <field name="name">Portal Demo User 15</field>
+            <field name="login">new_portal_user_15@techzone.dk</field>
+            <field name="email">new_portal_user_15@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_16" model="res.users">
+            <field name="name">Portal Demo User 16</field>
+            <field name="login">new_portal_user_16@techzone.dk</field>
+            <field name="email">new_portal_user_16@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_17" model="res.users">
+            <field name="name">Portal Demo User 17</field>
+            <field name="login">new_portal_user_17@techzone.dk</field>
+            <field name="email">new_portal_user_17@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_18" model="res.users">
+            <field name="name">Portal Demo User 18</field>
+            <field name="login">new_portal_user_18@techzone.dk</field>
+            <field name="email">new_portal_user_18@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_19" model="res.users">
+            <field name="name">Portal Demo User 19</field>
+            <field name="login">new_portal_user_19@techzone.dk</field>
+            <field name="email">new_portal_user_19@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_20" model="res.users">
+            <field name="name">Portal Demo User 20</field>
+            <field name="login">new_portal_user_20@techzone.dk</field>
+            <field name="email">new_portal_user_20@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_21" model="res.users">
+            <field name="name">Portal Demo User 21</field>
+            <field name="login">new_portal_user_21@techzone.dk</field>
+            <field name="email">new_portal_user_21@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_22" model="res.users">
+            <field name="name">Portal Demo User 22</field>
+            <field name="login">new_portal_user_22@techzone.dk</field>
+            <field name="email">new_portal_user_22@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_23" model="res.users">
+            <field name="name">Portal Demo User 23</field>
+            <field name="login">new_portal_user_23@techzone.dk</field>
+            <field name="email">new_portal_user_23@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.us"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_24" model="res.users">
+            <field name="name">Portal Demo User 24</field>
+            <field name="login">new_portal_user_24@techzone.dk</field>
+            <field name="email">new_portal_user_24@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.us"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_25" model="res.users">
+            <field name="name">Portal Demo User 25</field>
+            <field name="login">new_portal_user_25@techzone.dk</field>
+            <field name="email">new_portal_user_25@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_26" model="res.users">
+            <field name="name">Portal Demo User 26</field>
+            <field name="login">new_portal_user_26@techzone.dk</field>
+            <field name="email">new_portal_user_26@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.se"/>
+            <field name="password">password</field>
+        </record>
+
+        <record id="new_portal_user_27" model="res.users">
+            <field name="name">Portal Demo User 27</field>
+            <field name="login">new_portal_user_27@techzone.dk</field>
+            <field name="email">new_portal_user_27@techzone.dk</field>
+            <field name="groups_id" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="country_id" ref="base.dk"/>
+            <field name="password">password</field>
+        </record>
+
+    </data>
+</odoo>

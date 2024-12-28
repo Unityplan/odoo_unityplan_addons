@@ -1,0 +1,31 @@
+<odoo>
+    <template id="code_of_conduct_page" name="Code of Conduct Page">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="oe_structure o_editable" id="oe_structure_code_of_conduct_page_header">
+                            <t t-call="unityplan_website.s_text_block_code_of_conduct_page_header"/>
+                        </div>
+
+
+                            <div
+                                    class="oe_structure o_editable o_snippet_invisible d-none"
+                                    id="oe_structure_code_of_conduct_first_visit"
+                                    t-att-data-invisible="False if user_is_first_time_login else '1'"
+                                    data-name="Message for new users (first login)"
+                                    data-oe-id="code_of_conduct_first_visit"
+                                    data-oe-model="ir.ui.view"
+                            >
+                                <t t-call="unityplan_website.s_text_block_code_of_conduct_welcome"/>
+                            </div>
+
+                        <div class="oe_structure o_editable" id="oe_structure_code_of_conduct_all_users">
+                            <t t-call="unityplan_website.s_text_block_code_of_conduct_course_message"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- actions opening views on models -->
+        <record id="unityplan_dashboard_action" model="ir.actions.act_window">
+            <field name="name">Category Tags List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">unityplan.dashboard</field>
+            <field name="view_mode">form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Dashboard is empty!
+                </p>
+            </field>
+        </record>
+
+        <record id="unityplan_dashboard_form_view" model="ir.ui.view">
+            <field name="name">unityplan.dashboard.form.view</field>
+            <field name="model">unityplan.dashboard</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false" delete="false" duplicate="">
+                    <sheet>
+                        <div>
+                            <h1>Dashboard</h1>
+                        </div>
+                        <div>
+                            <div class="col col-md-9">
+						<div class="row">
+							<div class="col col-md-5">
+								<h5>Coming soon...!</h5>
+							</div>
+						</div>
+					</div>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Currencies -->
+        <!--// Example data
+        <record id="USD" model="res.currency">
+            <field name="name">USD</field>
+            <field name="full_name">United States dollar</field>
+            <field name="symbol">$</field>
+            <field name="rounding">0.01</field>
+            <field name="position">before</field>
+            <field name="active" eval="False"/>
+            <field name="currency_unit_label">Dollars</field>
+            <field name="currency_subunit_label">Cents</field>
+        </record>
+        -->
+
+        <!--
+        <record id="VEF" model="res.currency">
+            <field name="name">VEF</field>
+            <field name="full_name">Venezuelan bolívar fuerte</field>
+            <field name="symbol">Bs.F</field>
+            <field name="rounding">0.01</field>
+            <field name="active" eval="False"/>
+            <field name="currency_unit_label">Bolivar</field>
+            <field name="currency_subunit_label">Centimos</field>
+        </record>
+        -->
+
+
+    </data>
+</odoo>

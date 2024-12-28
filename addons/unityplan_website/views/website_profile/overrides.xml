@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- ========== OVERRIDE OF ACCESS DENIED PAGE LINK========== -->
+        <template id="profile_access_denied" inherit_id="website_profile.profile_access_denied">
+            <xpath expr="//div[@id='profile_access_denied_return_link_container']/p/a" position="replace">
+                <a href="javascript:history.back()">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Go back
+                </a>
+            </xpath>
+        </template>
+
+        <!-- ========== Override email_validation_banner template ========== -->
+        <template id="email_validation_banner_override" inherit_id="website_profile.email_validation_banner">
+            <xpath expr="//t[@t-set='my_account_redirect']" position="replace">
+                <!--<t t-set="my_account_redirect" t-value="portal_url+'?redirect=' (portal_my_security or '')"/>-->
+                <t t-set="my_account_redirect" t-value="'/profile/view#settings'"/>
+            </xpath>
+        </template>
+</odoo>

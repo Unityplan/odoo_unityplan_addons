@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo xmlns:odoo="http://www.odoo.com">
+    <data>
+        <record id="unityplan_view_forum_forum_form" model="ir.ui.view">
+            <field name="name">unityplan.view.forum.forum.form</field>
+            <field name="model">forum.forum</field>
+            <field name="inherit_id" ref="website_forum.forum_forum_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mode']" position="before">
+                    <field name="category"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="role_permissions" string="Role Permissions" odoo:invisible="mode != 'unityplan_questions' and mode != 'unityplan_discussions'">
+                        <p>Role Permissions - Overrules Karma Rights</p>
+                        <group>
+                            <group name="role_permissions_left">
+                                <field name="authorized_group_ask"/>
+                                <field name="authorized_group_answer"/>
+                                <field name="authorized_group_edit_own"/>
+                                <field name="authorized_group_edit_all"/>
+                                <field name="authorized_group_edit_retag"/>
+                                <field name="authorized_group_close_own"/>
+                                <field name="authorized_group_close_all"/>
+                                <field name="authorized_group_unlink_own"/>
+                                <field name="authorized_group_unlink_all"/>
+                                <field name="authorized_group_tag_create"/>
+                                <field name="authorized_group_upvote"/>
+                                <field name="authorized_group_downvote"/>
+                                <field name="authorized_group_answer_accept_own"/>
+                            </group>
+                            <group name="role_permissions_right">
+                                <field name="authorized_group_answer_accept_all"/>
+                                <field name="authorized_group_comment_own"/>
+                                <field name="authorized_group_comment_all"/>
+                                <field name="authorized_group_comment_convert_own"/>
+                                <field name="authorized_group_comment_convert_all"/>
+                                <field name="authorized_group_comment_unlink_own"/>
+                                <field name="authorized_group_comment_unlink_all"/>
+                                <field name="authorized_group_flag"/>
+                                <field name="authorized_group_dofollow"/>
+                                <field name="authorized_group_editor"/>
+                                <field name="authorized_group_user_bio"/>
+                                <field name="authorized_group_post"/>
+                                <field name="authorized_group_moderate"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
