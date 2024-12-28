@@ -1,4 +1,4 @@
-# Unityplan website addons for Odoo
+# Unityplan website addons for Odoo 17
 These modules are addons for the Odoo ERP system. They are designed to work with the Unityplan website and provide 
 additional functionality for the website, like user management, extra forum features, and course management.
 
