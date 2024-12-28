@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  odoo:
+    build: .
+    container_name: odoo
+    depends_on:
+      - odoo-db
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=odoo-db
+      - PORT=5432
+      - USER=odoo
+      - PASSWORD=odoo
+      - DATABASE=odoo17
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./addons:/mnt/extra-addons
+      - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./entrypoint.sh:/entrypoint.sh
+    entrypoint: ["/entrypoint.sh"]
+    command: ["odoo"]
+    networks:
+      - odoo
+
+  odoo-db:
+    image: postgres:13
+    container_name: odoo-db
+    environment:
+      - POSTGRES_DB=odoo17
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    expose:
+      - 9443
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+    networks:
+      - odoo
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+
+networks:
+  odoo:
+    driver: bridge
